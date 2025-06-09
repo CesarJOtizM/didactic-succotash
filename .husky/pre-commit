@@ -1,0 +1,59 @@
+echo '🏗️ Fixing, your project before committing'
+
+npx lint-staged
+
+if ! git diff --exit-code --quiet; then
+  echo "We found changes! 🚫🛑 Please review and commit again."
+  exit 1
+fi
+
+echo '🏗️👷 Styling, testing and building your project before committing'
+
+# Run tests
+# npm test ||
+# (
+#     echo '❌❌❌ Tests failed. Please fix the errors before committing. ❌❌❌';
+#     false;
+# )
+
+# Check Prettier standards
+npm run format ||
+(
+    echo '🤢🤮🤢🤮 Its F**KING RAW - Your styling looks disgusting. 🤢🤮🤢🤮\n            Prettier Check Failed. Run npm run format, add changes and try commit again.';
+    false;
+)
+
+# Check ESLint Standards
+npm run lint ||
+(
+        echo '😤🏀👋😤 Get that weak s**t out of here! 😤🏀👋😤 \n                ESLint Check Failed. Make the required changes listed above, add changes and try to commit again.'
+        false; 
+)
+
+# Check Stylelint Standards
+npm run lint:css ||
+(
+        echo '😤🏀👋😤 Get that weak s**t out of here! 😤🏀👋😤 \n                Stylelint Check Failed. Please run npm run fix:css.'
+        false; 
+)
+
+#Check TypeScript standards
+npm run lint:ts ||
+(
+    echo '🤡😂❌🤡 Failed Type check. 🤡😂❌🤡\n            Are you seriously trying to write that? Make the changes required above.'
+    false;
+)
+
+
+
+# Si todo pasa... Ahora podemos commitear
+echo '🤔🤔🤔🤔... Alright... Code looks good to me... Trying to build now. 🤔🤔🤔🤔'
+
+npm run build ||
+(
+    echo '❌👷🔨❌ Better call Bob... Because your build failed ❌👷🔨❌\n            Next build failed: View the errors above to see why. \n'
+    false;
+)
+
+# Si todo pasa... Ahora sí se hace el commit
+echo '✅✅✅✅ You win this time... I am committing this now. ✅✅✅✅'

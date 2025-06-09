@@ -14,17 +14,31 @@
 		"fix:lint": "eslint 'src/**/*.{js,jsx,ts,tsx}' --ext .js,.jsx,.ts,.tsx --fix",
 		"fix:css": "stylelint 'src/**/*.{css,scss}' --fix",
 		"test": "jest",
+		"db:generate": "prisma generate --schema=src/prisma/schema.prisma",
+		"db:push": "prisma db push --schema=src/prisma/schema.prisma",
+		"db:migrate": "prisma migrate deploy --schema=src/prisma/schema.prisma",
+		"db:migrate:dev": "prisma migrate dev --schema=src/prisma/schema.prisma",
+		"db:seed": "bunx tsx src/lib/db/seed.ts",
+		"db:reset": "prisma migrate reset --schema=src/prisma/schema.prisma --force",
+		"db:studio": "prisma studio --schema=src/prisma/schema.prisma",
+		"db:init": "npm run db:generate && npm run db:push",
 		"docker:up": "docker compose up -d",
 		"docker:down": "docker compose down",
 		"docker:build": "docker compose build",
 		"docker:logs": "docker compose logs -f",
 		"docker:restart": "docker compose restart",
-		"docker:clean": "docker compose down -v --remove-orphans"
+		"docker:clean": "docker compose down -v --remove-orphans",
+		"docker:dev": "docker compose up --build",
+		"docker:setup": "docker compose up -d && echo '🎉 Aplicación iniciada! Ve a http://localhost:3000 para la app y http://localhost:8080 para PGAdmin'"
 	},
 	"dependencies": {
+		"@prisma/client": "^6.9.0",
+		"@prisma/extension-accelerate": "^2.0.1",
 		"next": "15.3.3",
+		"prisma": "^6.9.0",
 		"react": "^19.1.0",
-		"react-dom": "^19.1.0"
+		"react-dom": "^19.1.0",
+		"tsx": "^4.19.4"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3",

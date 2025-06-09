@@ -31,6 +31,9 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # Asegurar que node_modules tenga los permisos correctos
 RUN chown -R $(whoami):$(whoami) /app/node_modules || true
 
+# Instalar postgresql-client para pg_isready
+RUN apk add --no-cache postgresql-client
+
 # Comando por defecto para desarrollo
 CMD ["bun", "run", "dev"]
 

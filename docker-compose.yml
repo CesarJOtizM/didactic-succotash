@@ -37,12 +37,41 @@ services:
       - .:/app
       - /app/node_modules
       - /app/.next
+      - /app/src/prisma/generated
     depends_on:
       postgres:
         condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -f http://localhost:3000/api/health || exit 1']
+      interval: 30s
+      timeout: 10s
+      retries: 3
     networks:
       - didactic-network
-    command: npm run dev
+    command: >
+      sh -c "
+        echo '🚀 Iniciando configuración automática...';
+        while ! pg_isready -h postgres -p 5432 -U didactic_user -d didactic_succotash; do
+          echo 'Esperando PostgreSQL...';
+          sleep 2;
+        done;
+        echo '✅ PostgreSQL listo!';
+        echo '🔧 Generando cliente Prisma...';
+        bun run db:generate;
+        echo '📊 Aplicando migraciones...';
+        bun run db:migrate || bun run db:push;
+        echo '✅ Base de datos configurada!';
+        echo '🌐 Iniciando aplicación...';
+        echo '===============================================';
+        echo '🎉 APLICACIÓN LISTA PARA USAR 🎉';
+        echo '===============================================';
+        echo '📱 Aplicación: http://localhost:3000';
+        echo '🗄️  PGAdmin: http://localhost:8080';
+        echo '   - Email: admin@didactic.com';
+        echo '   - Password: admin123';
+        echo '===============================================';
+        exec bun run dev;
+      "
 
   # PGAdmin para administrar la base de datos (opcional)
   pgadmin:

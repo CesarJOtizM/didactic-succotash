@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700">
+  <defs>
+    <style>
+      .title {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .subtitle {
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+      }
+
+      .small-text {
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+      }
+
+      .user-box {
+        fill: #1f77b4;
+        stroke: #1565c0;
+        stroke-width: 2;
+      }
+
+      .app-box {
+        fill: #2ca02c;
+        stroke: #1b5e20;
+        stroke-width: 2;
+      }
+
+      .frontend-box {
+        fill: #17a2b8;
+        stroke: #138496;
+        stroke-width: 2;
+      }
+
+      .api-box {
+        fill: #6610f2;
+        stroke: #520dc2;
+        stroke-width: 2;
+      }
+
+      .business-box {
+        fill: #fd7e14;
+        stroke: #e55a0e;
+        stroke-width: 2;
+      }
+
+      .db-box {
+        fill: #d62728;
+        stroke: #b71c1c;
+        stroke-width: 2;
+      }
+
+      .admin-box {
+        fill: #6f42c1;
+        stroke: #59359a;
+        stroke-width: 2;
+      }
+
+      .external-box {
+        fill: #ffc107;
+        stroke: #e0a800;
+        stroke-width: 2;
+      }
+
+      .text-white {
+        fill: white;
+      }
+
+      .text-black {
+        fill: black;
+      }
+
+      .arrow {
+        stroke: #333;
+        stroke-width: 2;
+        fill: none;
+        marker-end: url(#arrowhead);
+      }
+
+      .dotted-arrow {
+        stroke: #666;
+        stroke-width: 2;
+        fill: none;
+        stroke-dasharray: 5, 5;
+        marker-end: url(#arrowhead);
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="500" y="30" text-anchor="middle" class="title">Didactic Succotash - Diagrama de Contenedores C4</text>
+
+  <!-- User -->
+  <rect x="50" y="80" width="120" height="60" rx="10" class="user-box" />
+  <text x="110" y="100" text-anchor="middle" class="subtitle text-white">Usuario</text>
+  <text x="110" y="115" text-anchor="middle" class="small-text text-white">🌐 Navegador Web</text>
+
+  <!-- Main Application Group -->
+  <rect x="220" y="60" width="500" height="340" rx="15" class="app-box" />
+  <text x="470" y="85" text-anchor="middle" class="title text-white">Didactic Succotash [Aplicación Web]</text>
+
+  <!-- Frontend Container -->
+  <rect x="240" y="100" width="140" height="80" rx="8" class="frontend-box" />
+  <text x="310" y="120" text-anchor="middle" class="subtitle text-white">Frontend Container</text>
+  <text x="310" y="135" text-anchor="middle" class="small-text text-white">⚛️ Next.js App</text>
+  <text x="310" y="150" text-anchor="middle" class="small-text text-white">React + TypeScript</text>
+  <text x="310" y="165" text-anchor="middle" class="small-text text-white">Puerto 3000</text>
+
+  <!-- API Container -->
+  <rect x="400" y="100" width="140" height="80" rx="8" class="api-box" />
+  <text x="470" y="120" text-anchor="middle" class="subtitle text-white">API Container</text>
+  <text x="470" y="135" text-anchor="middle" class="small-text text-white">🔌 API Routes</text>
+  <text x="470" y="150" text-anchor="middle" class="small-text text-white">/api/payment_order/*</text>
+  <text x="470" y="165" text-anchor="middle" class="small-text text-white">Endpoints REST</text>
+
+  <!-- Business Logic Group -->
+  <rect x="240" y="200" width="460" height="180" rx="8" class="business-box" />
+  <text x="470" y="220" text-anchor="middle" class="subtitle text-white">Business Logic</text>
+
+  <!-- Domain Layer -->
+  <rect x="260" y="240" width="120" height="60" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="320" y="255" text-anchor="middle" class="small-text text-white">🏗️ Domain Layer</text>
+  <text x="320" y="270" text-anchor="middle" class="small-text text-white">Entities + Value Objects</text>
+  <text x="320" y="285" text-anchor="middle" class="small-text text-white">+ Domain Services</text>
+
+  <!-- Application Layer -->
+  <rect x="400" y="240" width="120" height="60" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="460" y="255" text-anchor="middle" class="small-text text-white">📋 Application Layer</text>
+  <text x="460" y="270" text-anchor="middle" class="small-text text-white">Use Cases + DTOs</text>
+  <text x="460" y="285" text-anchor="middle" class="small-text text-white">+ Ports</text>
+
+  <!-- Infrastructure Layer -->
+  <rect x="540" y="240" width="120" height="60" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="600" y="255" text-anchor="middle" class="small-text text-white">🔧 Infrastructure Layer</text>
+  <text x="600" y="270" text-anchor="middle" class="small-text text-white">Repositories + Adapters</text>
+  <text x="600" y="285" text-anchor="middle" class="small-text text-white">+ External Services</text>
+
+  <!-- Database -->
+  <rect x="250" y="450" width="150" height="80" rx="10" class="db-box" />
+  <text x="325" y="470" text-anchor="middle" class="subtitle text-white">Base de Datos</text>
+  <text x="325" y="490" text-anchor="middle" class="small-text text-white">🗄️ PostgreSQL 16</text>
+  <text x="325" y="505" text-anchor="middle" class="small-text text-white">didactic_succotash</text>
+  <text x="325" y="520" text-anchor="middle" class="small-text text-white">Puerto 5432</text>
+
+  <!-- PGAdmin -->
+  <rect x="450" y="450" width="150" height="80" rx="10" class="admin-box" />
+  <text x="525" y="470" text-anchor="middle" class="subtitle text-white">Herramientas Admin</text>
+  <text x="525" y="490" text-anchor="middle" class="small-text text-white">🔧 PGAdmin</text>
+  <text x="525" y="505" text-anchor="middle" class="small-text text-white">Interface Web</text>
+  <text x="525" y="520" text-anchor="middle" class="small-text text-white">Puerto 8080</text>
+
+  <!-- External Systems -->
+  <rect x="750" y="180" width="150" height="80" rx="10" class="external-box" />
+  <text x="825" y="200" text-anchor="middle" class="subtitle text-black">Sistemas Externos</text>
+  <text x="825" y="220" text-anchor="middle" class="small-text text-black">💳 Proveedor de Pagos</text>
+  <text x="825" y="235" text-anchor="middle" class="small-text text-black">API Externa</text>
+
+  <!-- Arrows -->
+  <!-- Browser to Next.js -->
+  <path d="M 170 110 L 240 130" class="arrow" />
+
+  <!-- Next.js to API -->
+  <path d="M 380 140 L 400 140" class="arrow" />
+
+  <!-- API to Application -->
+  <path d="M 470 180 L 460 240" class="arrow" />
+
+  <!-- Application to Domain -->
+  <path d="M 440 270 L 380 270" class="arrow" />
+
+  <!-- Application to Infrastructure -->
+  <path d="M 480 270 L 540 270" class="arrow" />
+
+  <!-- Infrastructure to Database -->
+  <path d="M 580 300 Q 500 380 400 450" class="arrow" />
+
+  <!-- Infrastructure to External -->
+  <path d="M 660 260 L 750 220" class="dotted-arrow" />
+
+  <!-- PGAdmin to Database -->
+  <path d="M 450 490 L 400 490" class="arrow" />
+</svg>

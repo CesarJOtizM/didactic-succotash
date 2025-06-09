@@ -15,39 +15,39 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 
 ---
 
-## 2️⃣ Setup inicial del proyecto [⬜]
+## 2️⃣ Setup inicial del proyecto [✅]
 
-- [ ] Crear repositorio GitHub
-- [ ] Setup inicial de proyecto Backend (Astro o NextJs)
-- [ ] Setup inicial de proyecto Frontend con React (dentro de Astro o NextJs)
-- [ ] Configuración de Docker
-- [ ] Configuración de base de datos (PostgreSQL recomendado)
-- [ ] Documentar pasos de Setup en README
-
----
-
-## 3️⃣ Arquitectura base [⬜]
-
-- [ ] Definir estructura basada en arquitectura hexagonal
-  - [ ] Domain
-  - [ ] Application
-  - [ ] Infrastructure (Adapters + Repositorios)
-  - [ ] API layer
-- [ ] Diagramar arquitectura (opcionalmente C4)
+- [x] Crear repositorio GitHub
+- [x] Setup inicial de proyecto Backend (NextJs)
+- [x] Setup inicial de proyecto Frontend con React (dentro de NextJs)
+- [x] Configuración de Docker
+- [x] Configuración de base de datos (PostgreSQL implementado con docker-compose)
+- [x] Documentar pasos de Setup en README
 
 ---
 
-## 4️⃣ Desarrollo de funcionalidades [⬜]
+## 3️⃣ Arquitectura base [✅]
+
+- [x] Definir estructura basada en arquitectura hexagonal
+  - [x] Domain (estructura creada, pero sin implementación)
+  - [x] Application (estructura creada, pero sin implementación)
+  - [x] Infrastructure (estructura creada, pero sin implementación)
+  - [x] API layer (básico implementado)
+- [x] Diagramar arquitectura (opcionalmente C4)
+
+---
+
+## 4️⃣ Desarrollo de funcionalidades [🔄]
 
 ### 4.1 Crear orden de pago
 
-- [ ] Endpoint: `POST /api/payment_order/:uuid`
+- [🔄] Endpoint: `POST /api/payment_order/:uuid` (estructura básica creada, sin lógica de negocio)
 - [ ] Guardar orden en DB
 - [ ] Responder con el formato requerido
 
 ### 4.2 Ver orden de pago
 
-- [ ] Endpoint: `GET /payment_order/:uuid`
+- [🔄] Endpoint: `GET /payment_order/:uuid` (página básica creada, sin implementación)
 - [ ] Obtener datos desde DB y renderizar
 
 ### 4.3 Listar métodos de pago asociados al país

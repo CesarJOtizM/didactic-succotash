@@ -1,0 +1,70 @@
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    container_name: didactic-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-didactic_succotash}
+      POSTGRES_USER: ${POSTGRES_USER:-didactic_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-didactic_password}
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U didactic_user -d didactic_succotash']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - didactic-network
+
+  # Aplicación Next.js
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    container_name: didactic-web
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - DATABASE_URL=${DATABASE_URL:-postgresql://didactic_user:didactic_password@postgres:5432/didactic_succotash}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:3000}
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - didactic-network
+    command: npm run dev
+
+  # PGAdmin para administrar la base de datos (opcional)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: didactic-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@didactic.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin123}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - '8080:80'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - didactic-network
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  didactic-network:
+    driver: bridge

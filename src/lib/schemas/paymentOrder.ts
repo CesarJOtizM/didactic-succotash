@@ -16,6 +16,13 @@ export const createPaymentOrderSchema = z.object({
 // Tipos TypeScript inferidos del schema
 export type CreatePaymentOrderRequest = z.infer<typeof createPaymentOrderSchema>;
 
+// Schema para validar UUID en peticiones GET
+export const getPaymentOrderParamsSchema = z.object({
+	uuid: z.string().uuid('El UUID proporcionado no es válido').min(1, 'El UUID es requerido')
+});
+
+export type GetPaymentOrderParams = z.infer<typeof getPaymentOrderParamsSchema>;
+
 // Schema para la respuesta de payment order
 export const paymentOrderResponseSchema = z.object({
 	uuid: z.string().uuid(),

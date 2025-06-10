@@ -1,5 +1,6 @@
 import { PaymentOrderRepository } from 'src/application/ports/paymentOrderRepository';
 import { PaymentOrder } from 'src/domain/entities/paymentOrder';
+import { PaymentOrder as PrismaPaymentOrder } from 'src/prisma/generated';
 import { prisma } from 'src/lib/db';
 
 // Implementación del repositorio usando Prisma
@@ -47,7 +48,7 @@ export const createPrismaPaymentOrderRepository = (): PaymentOrderRepository => 
 };
 
 // Mapper de entidad Prisma a entidad de dominio
-const mapPrismaToPaymentOrder = (prismaPaymentOrder: PaymentOrder): PaymentOrder => ({
+const mapPrismaToPaymentOrder = (prismaPaymentOrder: PrismaPaymentOrder): PaymentOrder => ({
 	uuid: prismaPaymentOrder.uuid,
 	type: prismaPaymentOrder.type,
 	amount: prismaPaymentOrder.amount,

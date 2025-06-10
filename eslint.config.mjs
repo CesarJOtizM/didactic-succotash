@@ -153,7 +153,8 @@ const eslintConfig = [
 			'public',
 			'out',
 			'.next',
-			'test'
+			'test',
+			'**/prisma/generated/**'
 			// '**/*.test.{js,jsx,ts,tsx}'
 		]
 	}

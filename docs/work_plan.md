@@ -29,11 +29,11 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 ## 3️⃣ Arquitectura base [✅]
 
 - [x] Definir estructura basada en arquitectura hexagonal
-  - [x] Domain (estructura creada, pero sin implementación)
-  - [x] Application (estructura creada, pero sin implementación)
-  - [x] Infrastructure (estructura creada, pero sin implementación)
-  - [x] API layer (básico implementado)
-- [x] Diagramar arquitectura (opcionalmente C4)
+  - [x] Domain (estructura implementada con entidades y value objects)
+  - [x] Application (estructura implementada con DTOs, ports y use cases)
+  - [x] Infrastructure (estructura implementada con repositorios y servicios)
+  - [x] API layer (implementado con validaciones y manejo de errores)
+- [x] Diagramar arquitectura (diagramas C4 implementados)
 
 ---
 
@@ -41,9 +41,9 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 
 ### 4.1 Crear orden de pago
 
-- [🔄] Endpoint: `POST /api/payment_order/:uuid` (estructura básica creada, sin lógica de negocio)
-- [ ] Guardar orden en DB
-- [ ] Responder con el formato requerido
+- [x] Endpoint: `POST /api/payment_order` (implementado completamente con lógica de negocio)
+- [x] Guardar orden en DB (implementado con Prisma)
+- [x] Responder con el formato requerido (implementado con DTOs y validaciones)
 
 ### 4.2 Ver orden de pago
 
@@ -64,9 +64,9 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 
 ---
 
-## 5️⃣ Testing [⬜]
+## 5️⃣ Testing [🔄]
 
-- [ ] Setup de Jest
+- [x] Setup de Jest (configurado en package.json y jest.config.ts)
 - [ ] Implementar tests unitarios
 - [ ] Implementar tests de integración
 - [ ] Documentar cómo correr los tests
@@ -90,14 +90,14 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 
 ---
 
-## 8️⃣ Finalización y documentación [⬜]
+## 8️⃣ Finalización y documentación [🔄]
 
-- [ ] Completar README:
-  - [ ] Setup
+- [x] Completar README:
+  - [x] Setup (documentado con Docker)
   - [ ] Tests
-  - [ ] Explicación de arquitectura
+  - [x] Explicación de arquitectura (diagramas C4 incluidos)
   - [ ] Scope implementado
-- [ ] Verificar que el proyecto se levanta con `docker-compose up`
+- [x] Verificar que el proyecto se levanta con `docker-compose up`
 - [ ] Pruebas finales de la aplicación
 
 ---

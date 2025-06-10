@@ -1,17 +1,33 @@
 import { NextResponse } from 'next/server';
 
-export async function GET() {
+interface HealthResponse {
+	status: 'healthy';
+	timestamp: string;
+	service: string;
+}
+
+interface ErrorResponse {
+	status: 'unhealthy';
+	error: string;
+}
+
+export async function GET(): Promise<NextResponse<HealthResponse | ErrorResponse>> {
 	try {
-		return NextResponse.json({
+		const response: HealthResponse = {
 			status: 'healthy',
 			timestamp: new Date().toISOString(),
 			service: 'didactic-succotash'
-		});
+		};
+
+		return NextResponse.json(response);
 	} catch (error) {
 		console.error(error);
-		return NextResponse.json(
-			{ status: 'unhealthy', error: 'Service unavailable' },
-			{ status: 503 }
-		);
+
+		const errorResponse: ErrorResponse = {
+			status: 'unhealthy',
+			error: 'Service unavailable'
+		};
+
+		return NextResponse.json(errorResponse, { status: 503 });
 	}
 }

@@ -82,16 +82,19 @@ docker/
 ## 🐛 Solución de Problemas
 
 ### Si la aplicación no inicia:
+
 ```bash
 bun run docker:logs
 ```
 
 ### Si la base de datos no se conecta:
+
 ```bash
 docker compose exec postgres pg_isready -U didactic_user -d didactic_succotash
 ```
 
 ### Si necesitas reconstruir todo:
+
 ```bash
 bun run docker:clean
 bun run docker:dev
@@ -111,4 +114,4 @@ bun run db:migrate:dev   # Crear nueva migración
 bun run db:push          # Empujar cambios del schema
 bun run db:studio        # Abrir Prisma Studio
 bun run db:seed          # Ejecutar seeds (si existen)
-``` 
+```

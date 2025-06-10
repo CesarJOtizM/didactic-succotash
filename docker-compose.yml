@@ -58,8 +58,17 @@ services:
         echo '✅ PostgreSQL listo!';
         echo '🔧 Generando cliente Prisma...';
         bun run db:generate;
-        echo '📊 Aplicando migraciones...';
-        bun run db:migrate || bun run db:push;
+        echo '📊 Configurando base de datos...';
+        
+        # Verificar si existen migraciones
+        if [ ! -d 'src/prisma/migrations' ] || [ ! \"$(ls -A src/prisma/migrations)\" ]; then
+          echo '📝 No se encontraron migraciones, creando migración inicial...';
+          bun run db:migrate:dev --name init;
+        else
+          echo '📋 Aplicando migraciones existentes...';
+          bun run db:migrate || bun run db:push;
+        fi;
+        
         echo '✅ Base de datos configurada!';
         echo '🌐 Iniciando aplicación...';
         echo '===============================================';

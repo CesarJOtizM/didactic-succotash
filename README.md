@@ -16,6 +16,19 @@ Este directorio contiene la configuración de Docker para ejecutar la aplicació
 - **Usuario**: didactic_user
 - **Contraseña**: didactic_password
 
+## 🚀 Configuración Automática
+
+¡El proyecto incluye **configuración automática completa**! Al ejecutar `docker:up`, el sistema automáticamente:
+
+1. ✅ Espera a que PostgreSQL esté listo
+2. ✅ Genera el cliente Prisma
+3. ✅ Detecta si existen migraciones:
+   - Si **NO** hay migraciones → Crea migración inicial automáticamente
+   - Si **SÍ** hay migraciones → Las aplica automáticamente
+4. ✅ Inicia la aplicación
+
+**Para nuevos desarrolladores**: Solo necesitas ejecutar `npm run docker:up` y todo estará listo!
+
 ## Comandos útiles
 
 ### Iniciar servicios

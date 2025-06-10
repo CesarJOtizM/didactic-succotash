@@ -53,3 +53,42 @@ export const mapCreateDtoToPaymentOrder = (
 		payment_url: `${baseUrl}/api/payment_order/${uuid}`
 	}
 });
+
+// DTO para procesamiento de orden de pago
+export interface ProcessPaymentOrderDto {
+	readonly uuid: string;
+	readonly payment_method_id?: string; // Opcional para permitir ruteo automático
+}
+
+// DTO para respuesta de procesamiento exitoso
+export interface ProcessPaymentSuccessResponseDto {
+	readonly status: 'success';
+	readonly transaction_id: string;
+}
+
+// DTO para respuesta de procesamiento con error
+export interface ProcessPaymentErrorResponseDto {
+	readonly status: 'Error';
+	readonly transaction_id: string;
+}
+
+// Union type para respuesta de procesamiento
+export type ProcessPaymentResponseDto =
+	| ProcessPaymentSuccessResponseDto
+	| ProcessPaymentErrorResponseDto;
+
+// Mapper para respuesta exitosa de procesamiento
+export const mapToProcessPaymentSuccessResponse = (
+	transactionId: string
+): ProcessPaymentSuccessResponseDto => ({
+	status: 'success',
+	transaction_id: transactionId
+});
+
+// Mapper para respuesta de error de procesamiento
+export const mapToProcessPaymentErrorResponse = (
+	transactionId: string
+): ProcessPaymentErrorResponseDto => ({
+	status: 'Error',
+	transaction_id: transactionId
+});

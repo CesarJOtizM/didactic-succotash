@@ -1,3 +1,4 @@
+import { version, validate } from 'uuid';
 import { ZodSchema, ZodError } from 'zod';
 
 // Resultado encapsulado para validaciones
@@ -60,4 +61,24 @@ export const formatValidationErrorResponse = <T>(result: ValidationResult<T>) =>
 			type: 'validation_error'
 		}
 	};
+};
+
+// Función para validar formato UUID v4
+export const isValidUuid = (uuid: string): boolean => {
+	return validate(uuid) && version(uuid) === 4;
+};
+
+// Helper para validar y normalizar UUID
+export const validateAndNormalizeUuid = (uuid: string): ValidationResult<string> => {
+	if (!uuid || typeof uuid !== 'string') {
+		return createValidationError('UUID es requerido y debe ser una cadena');
+	}
+
+	const trimmedUuid = uuid.trim();
+
+	if (!isValidUuid(trimmedUuid)) {
+		return createValidationError('El formato del UUID no es válido');
+	}
+
+	return createValidationSuccess(trimmedUuid.toLowerCase());
 };

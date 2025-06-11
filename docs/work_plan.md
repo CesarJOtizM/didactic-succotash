@@ -40,7 +40,7 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 
 ---
 
-## 4️⃣ Desarrollo de funcionalidades [✅]
+## 4️⃣ Desarrollo de funcionalidades [🔄]
 
 ### 4.1 Crear orden de pago
 
@@ -52,13 +52,13 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 ### 4.2 Ver orden de pago
 
 - [x] Endpoint: `GET /api/payment_order/:uuid` (implementado completamente con validaciones y manejo de errores)
-- [🔄] Página: `GET /payment_order/:uuid` (página básica creada, sin implementación)
+- [ ] Página: `GET /payment_order/:uuid` (página básica de pagos creada, pero falta la página específica por UUID)
 - [ ] Obtener datos desde DB y renderizar en la página frontend
 
 ### 4.3 Listar métodos de pago asociados al país
 
 - [x] Endpoint: `GET /api/payment_methods/:country` (implementado completamente con mock de datos)
-- [x] Mock de métodos de pago por país (CO, MX, BR, US, AR, CL con datos reales)
+- [x] Mock de métodos de pago por país (CO, MX, BR, US, AR, CL con datos reales y completos)
 - [x] Filtro por monto disponible (query parameter `?amount=`)
 - [x] Validaciones con Zod y manejo de errores
 - [ ] Renderizar métodos de pago en UI
@@ -72,7 +72,7 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 
 ---
 
-## 5️⃣ Testing [🔄]
+## 5️⃣ Testing [⬜]
 
 - [x] Setup de Jest (configurado en package.json y jest.config.ts)
 - [x] Configuración de Testing Library (configurado para React y DOM)
@@ -85,15 +85,16 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 
 ## 6️⃣ Frontend [⬜]
 
-- [ ] Crear página de orden de pago
+- [x] Crear página de pagos básica (página lista implementada)
+- [ ] Crear página de orden de pago específica por UUID
 - [ ] Renderizar datos desde servidor
-- [ ] Diseñar UI (Tailwind opcional)
+- [ ] Diseñar UI (Tailwind configurado pero sin implementar)
 - [ ] Agregar formulario de pago
 - [ ] Implementar transiciones y creatividad
 
 ---
 
-## 7️⃣ Extras / Bonus [⬜]
+## 7️⃣ Extras / Bonus [🔄]
 
 - [x] Pensamiento escalable para agregar más métodos de pago (arquitectura extensible implementada)
 - [ ] Almacenar métricas de requests (éxito, duración, proveedor usado)
@@ -106,7 +107,7 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 
 - [x] Completar README:
   - [x] Setup (documentado con Docker)
-  - [ ] Tests
+  - [ ] Tests (configuración documentada, pero faltan tests implementados)
   - [x] Explicación de arquitectura (diagramas C4 incluidos)
   - [x] Scope implementado (documentado completamente)
 - [x] Verificar que el proyecto se levanta con `docker-compose up`
@@ -124,13 +125,13 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 
 ## 📊 Resumen del Progreso Actual
 
-### ✅ **Completado (92%)**
+### ✅ **Completado (85%)**
 
 - ✅ **Setup completo del proyecto** con Docker, PostgreSQL, Next.js
 - ✅ **Arquitectura hexagonal** completamente implementada
 - ✅ **API para crear órdenes** (`POST /api/payment_order`) funcionando
 - ✅ **API para obtener órdenes** (`GET /api/payment_order/:uuid`) funcionando
-- ✅ **API de métodos de pago** (`GET /api/payment_methods/:country`) con filtros
+- ✅ **API de métodos de pago** (`GET /api/payment_methods/:country`) con filtros completos
 - ✅ **API para procesar órdenes** (`POST /api/payment_order/:uuid`) con ruteo inteligente
 - ✅ **Mock completo de métodos de pago** para 6 países (CO, MX, BR, US, AR, CL)
 - ✅ **Ruteo inteligente de proveedores** con fallback automático
@@ -140,16 +141,17 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 - ✅ **Documentación completa** con diagramas C4
 - ✅ **Setup de testing** con Jest y Testing Library
 
-### 🔄 **En progreso (5%)**
+### 🔄 **En progreso (10%)**
 
-- 🔄 **Frontend para ver orden de pago** (página básica creada)
+- 🔄 **Frontend básico** (página de pagos general implementada)
 - 🔄 **Tests** (framework configurado, faltan implementaciones)
 
-### ⬜ **Pendiente (3%)**
+### ⬜ **Pendiente (5%)**
 
-- ⬜ **Frontend completo** con formularios y métodos de pago
-- ⬜ **Extras/bonus** (métricas, escalabilidad)
+- ⬜ **Frontend completo** con página específica por UUID, formularios y métodos de pago
+- ⬜ **Tests implementados** (unitarios e integración)
+- ⬜ **Extras/bonus** (métricas de transacciones)
 
-**Estado general: 🟢 Excelente progreso - 92% completado**
+**Estado general: 🟢 Muy buen progreso - 85% completado**
 
 ---

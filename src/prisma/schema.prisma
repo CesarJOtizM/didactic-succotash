@@ -15,20 +15,17 @@ datasource db {
 }
 
 model PaymentOrder {
-  uuid           String   @id @default(uuid())
-  type           String   @default("payment_order")
+  uuid           String    @id @default(uuid())
+  type           String    @default("payment_order")
   amount         Int
   description    String
-  countryIsoCode String   @map("country_iso_code")
-  createdAt      DateTime @default(now()) @map("created_at")
-  paymentUrl     String   @map("payment_url")
-  status         String   @default("pending")
-  provider       String   @default("stripe")
-  attempts       Int      @default(0)
-  processedAt    DateTime @map("processed_at")
-  currency       String   @default("USD")
-  countryName    String   @map("country_name")
-  providerData   Json     @map("provider_data")
+  countryIsoCode String    @map("country_iso_code")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  paymentUrl     String    @map("payment_url")
+  status         String    @default("pending")
+  provider       String    @default("stripe")
+  attempts       Int       @default(0)
+  processedAt    DateTime? @map("processed_at")
 
   @@map("payment_orders")
 }

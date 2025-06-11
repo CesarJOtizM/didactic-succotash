@@ -18,6 +18,10 @@ export interface PaymentOrderResponseDto {
 		readonly country_iso_code: string;
 		readonly created_at: string;
 		readonly payment_url: string;
+		readonly status: string;
+		readonly provider: string;
+		readonly attempts: number;
+		readonly processed_at?: string;
 	};
 }
 
@@ -33,7 +37,11 @@ export const mapPaymentOrderToResponseDto = (
 		description: paymentOrder.description,
 		country_iso_code: paymentOrder.countryIsoCode,
 		created_at: paymentOrder.createdAt.toISOString(),
-		payment_url: `${baseUrl}/api/payment_order/${paymentOrder.uuid}`
+		payment_url: `${baseUrl}/api/payment_order/${paymentOrder.uuid}`,
+		status: paymentOrder.status || 'pending',
+		provider: paymentOrder.provider || 'stripe',
+		attempts: paymentOrder.attempts || 0,
+		...(paymentOrder.processedAt && { processed_at: paymentOrder.processedAt.toISOString() })
 	}
 });
 

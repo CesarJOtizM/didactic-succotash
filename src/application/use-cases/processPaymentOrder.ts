@@ -43,6 +43,17 @@ export const createProcessPaymentOrderUseCase = (
 				};
 			}
 
+			// Verificar si la orden ya fue procesada
+			if (paymentOrder.status === 'completed') {
+				return {
+					success: false,
+					error: 'La orden de pago ya fue procesada exitosamente'
+				};
+			}
+
+			// Incrementar los intentos
+			const newAttempts = (paymentOrder.attempts || 0) + 1;
+
 			// Obtener métodos de pago disponibles para el país y monto
 			const availablePaymentMethods = getAvailablePaymentMethodsForAmount(
 				paymentOrder.countryIsoCode,
@@ -50,6 +61,13 @@ export const createProcessPaymentOrderUseCase = (
 			);
 
 			if (!availablePaymentMethods.length) {
+				// Actualizar status a failed
+				await paymentOrderRepository.update(params.uuid, {
+					status: 'failed',
+					attempts: newAttempts,
+					processedAt: new Date()
+				});
+
 				return {
 					success: false,
 					error: `No hay métodos de pago disponibles para ${paymentOrder.countryIsoCode} con monto ${paymentOrder.amount}`
@@ -70,6 +88,13 @@ export const createProcessPaymentOrderUseCase = (
 
 			// Mapear respuesta según el resultado
 			if (paymentResult.success) {
+				// Actualizar status a completed
+				await paymentOrderRepository.update(params.uuid, {
+					status: 'completed',
+					attempts: newAttempts,
+					processedAt: new Date()
+				});
+
 				const successResponse = mapToProcessPaymentSuccessResponse(paymentResult.transaction_id);
 				console.info(
 					`✅ Pago completado exitosamente - Transaction: ${paymentResult.transaction_id}`
@@ -80,6 +105,13 @@ export const createProcessPaymentOrderUseCase = (
 					data: successResponse
 				};
 			} else {
+				// Actualizar status a failed
+				await paymentOrderRepository.update(params.uuid, {
+					status: 'failed',
+					attempts: newAttempts,
+					processedAt: new Date()
+				});
+
 				const errorResponse = mapToProcessPaymentErrorResponse(paymentResult.transaction_id);
 				console.info(
 					`❌ Pago falló - Transaction: ${paymentResult.transaction_id} | Error: ${paymentResult.error_message}`
@@ -92,6 +124,18 @@ export const createProcessPaymentOrderUseCase = (
 			}
 		} catch (error) {
 			console.error('Error en processPaymentOrderUseCase:', error);
+
+			// En caso de error, también intentar actualizar el status a failed
+			try {
+				await paymentOrderRepository.update(params.uuid, {
+					status: 'failed',
+					attempts: (await paymentOrderRepository.findByUuid(params.uuid))?.attempts || 0 + 1,
+					processedAt: new Date()
+				});
+			} catch (updateError) {
+				console.error('Error al actualizar status a failed:', updateError);
+			}
+
 			return {
 				success: false,
 				error: error instanceof Error ? error.message : 'Error desconocido al procesar el pago'

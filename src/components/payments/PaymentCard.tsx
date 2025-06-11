@@ -18,13 +18,12 @@ export const PaymentCard: React.FC<Iprops> = ({ paymentOrder }) => {
 		description,
 		uuid,
 		amount,
-		currency,
-		countryName,
 		status,
 		createdAt,
 		processedAt,
 		provider,
-		attempts
+		attempts,
+		countryIsoCode
 	} = paymentOrder;
 
 	const onViewDetail = () => {
@@ -83,14 +82,14 @@ export const PaymentCard: React.FC<Iprops> = ({ paymentOrder }) => {
 
 					{/* Amount - más prominente */}
 					<div className="py-1 text-lg font-semibold text-blue-600">
-						{formatCurrency(amount, currency || 'USD')}
+						{formatCurrency(amount, countryIsoCode || 'USD')}
 					</div>
 
 					{/* Details en grid compacto */}
 					<div className="space-y-1.5 text-xs text-gray-600">
 						<div className="flex items-center gap-1.5">
 							<MapPin className="h-3 w-3 shrink-0" />
-							<span className="truncate">{countryName}</span>
+							<span className="truncate">{countryIsoCode}</span>
 						</div>
 						<div className="flex items-center gap-1.5">
 							<Calendar className="h-3 w-3 shrink-0" />

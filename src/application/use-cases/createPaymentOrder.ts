@@ -28,7 +28,7 @@ export const createPaymentOrderUseCase = async (
 		// Generar UUID único
 		const uuid = uuidv4();
 
-		// Crear la entidad PaymentOrder
+		// Crear la entidad PaymentOrder con status "pending" por defecto
 		const paymentOrder: PaymentOrder = {
 			uuid,
 			type: 'payment_order',
@@ -36,7 +36,9 @@ export const createPaymentOrderUseCase = async (
 			description: params.dto.description,
 			countryIsoCode: params.dto.countryIsoCode,
 			createdAt: new Date(),
-			paymentUrl: `${params.baseUrl}/payment_order/${uuid}`
+			paymentUrl: `${params.baseUrl}/payment_order/${uuid}`,
+			status: 'pending',
+			attempts: 0
 		};
 
 		// Guardar en el repositorio

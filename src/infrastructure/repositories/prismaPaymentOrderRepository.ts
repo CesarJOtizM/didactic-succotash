@@ -15,7 +15,8 @@ export const createPrismaPaymentOrderRepository = (): PaymentOrderRepository => 
 					description: paymentOrder.description,
 					countryIsoCode: paymentOrder.countryIsoCode,
 					createdAt: paymentOrder.createdAt,
-					paymentUrl: paymentOrder.paymentUrl
+					paymentUrl: paymentOrder.paymentUrl,
+					status: paymentOrder.status || 'pending'
 				}
 			});
 
@@ -41,9 +42,50 @@ export const createPrismaPaymentOrderRepository = (): PaymentOrderRepository => 
 		}
 	};
 
+	const findAll = async (): Promise<PaymentOrder[]> => {
+		try {
+			const paymentOrders = await prisma.paymentOrder.findMany({
+				orderBy: {
+					createdAt: 'desc'
+				}
+			});
+
+			return paymentOrders.map(mapPrismaToPaymentOrder);
+		} catch (error) {
+			throw new Error(
+				`Error al obtener PaymentOrders: ${error instanceof Error ? error.message : 'Error desconocido'}`
+			);
+		}
+	};
+
+	const update = async (
+		uuid: string,
+		updates: Partial<PaymentOrder>
+	): Promise<PaymentOrder | null> => {
+		try {
+			const updated = await prisma.paymentOrder.update({
+				where: { uuid },
+				data: {
+					...(updates.status && { status: updates.status }),
+					...(updates.provider && { provider: updates.provider }),
+					...(updates.attempts !== undefined && { attempts: updates.attempts }),
+					...(updates.processedAt && { processedAt: updates.processedAt })
+				}
+			});
+
+			return mapPrismaToPaymentOrder(updated);
+		} catch (error) {
+			throw new Error(
+				`Error al actualizar PaymentOrder: ${error instanceof Error ? error.message : 'Error desconocido'}`
+			);
+		}
+	};
+
 	return {
 		save,
-		findByUuid
+		findByUuid,
+		findAll,
+		update
 	};
 };
 
@@ -55,7 +97,11 @@ const mapPrismaToPaymentOrder = (prismaPaymentOrder: PrismaPaymentOrder): Paymen
 	description: prismaPaymentOrder.description,
 	countryIsoCode: prismaPaymentOrder.countryIsoCode,
 	createdAt: prismaPaymentOrder.createdAt,
-	paymentUrl: prismaPaymentOrder.paymentUrl
+	paymentUrl: prismaPaymentOrder.paymentUrl,
+	status: prismaPaymentOrder.status,
+	provider: prismaPaymentOrder.provider,
+	attempts: prismaPaymentOrder.attempts,
+	processedAt: prismaPaymentOrder?.processedAt || undefined
 });
 
 // Instancia singleton del repositorio

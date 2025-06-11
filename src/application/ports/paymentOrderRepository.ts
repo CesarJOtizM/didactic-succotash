@@ -4,6 +4,8 @@ import { PaymentOrder } from 'src/domain/entities/paymentOrder';
 export interface PaymentOrderRepository {
 	save: (paymentOrder: PaymentOrder) => Promise<PaymentOrder>;
 	findByUuid: (uuid: string) => Promise<PaymentOrder | null>;
+	findAll: () => Promise<PaymentOrder[]>;
+	update: (uuid: string, updates: Partial<PaymentOrder>) => Promise<PaymentOrder | null>;
 }
 
 // Resultado encapsulado para operaciones del repositorio

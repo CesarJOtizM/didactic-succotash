@@ -7,24 +7,14 @@ export interface PaymentOrder {
 	readonly countryIsoCode: string;
 	readonly createdAt: Date;
 	readonly paymentUrl: string;
+	readonly status?: string;
+	readonly provider?: string;
+	readonly attempts?: number;
+	readonly processedAt?: Date;
+	readonly currency?: string;
+	readonly countryName?: string;
+	readonly providerData?: Record<string, unknown>;
 }
-
-// Factory para crear una PaymentOrder
-export const createPaymentOrder = (params: {
-	uuid: string;
-	amount: number;
-	description: string;
-	countryIsoCode: string;
-	paymentUrl: string;
-}): PaymentOrder => ({
-	uuid: params.uuid,
-	type: 'payment_order',
-	amount: params.amount,
-	description: params.description,
-	countryIsoCode: params.countryIsoCode,
-	createdAt: new Date(),
-	paymentUrl: params.paymentUrl
-});
 
 // Helper para validar que el amount sea positivo
 export const isValidAmount = (amount: number): boolean => amount > 0;

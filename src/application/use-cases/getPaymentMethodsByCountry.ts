@@ -60,8 +60,3 @@ export const getPaymentMethodsByCountryUseCase = async (
 };
 
 // Helper para validar código ISO del país
-
-// Helper para validar que el monto sea válido
-export const isValidAmount = (amount: number): boolean => {
-	return amount > 0 && Number.isFinite(amount);
-};

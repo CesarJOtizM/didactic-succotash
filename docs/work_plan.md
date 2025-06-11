@@ -118,7 +118,7 @@ Desarrollar una solución completa para el challenge aplicando las mejores prác
 
 ## 9️⃣ Entrega [⬜]
 
-- [ ] Subir código a GitHub
+- [x] Subir código a GitHub
 - [ ] Verificar que el repositorio contiene toda la documentación y código necesario
 
 ---

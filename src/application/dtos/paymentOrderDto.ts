@@ -38,10 +38,9 @@ export const mapPaymentOrderToResponseDto = (
 		country_iso_code: paymentOrder.countryIsoCode,
 		created_at: paymentOrder.createdAt.toISOString(),
 		payment_url: `${baseUrl}/api/payment_order/${paymentOrder.uuid}`,
-		status: paymentOrder.status || 'pending',
-		provider: paymentOrder.provider || 'stripe',
-		attempts: paymentOrder.attempts || 0,
-		...(paymentOrder.processedAt && { processed_at: paymentOrder.processedAt.toISOString() })
+		status: paymentOrder.status || 'completed',
+		provider: paymentOrder.provider || '',
+		attempts: paymentOrder.attempts || 0
 	}
 });
 

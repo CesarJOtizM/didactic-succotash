@@ -3,56 +3,67 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, Calendar, CheckCircle, Clock, MapPin, XCircle } from 'lucide-react';
-import { PaymentOrder } from 'src/domain/entities';
+import { PaymentOrderResponseDto } from 'src/application/dtos';
 import { formatDate } from 'src/lib/utils';
 import { formatCurrency } from 'src/lib/utils/formatCurrency';
 import { Badge, Button, Card, CardContent } from '../ui';
 
 interface Iprops {
-	paymentOrder: PaymentOrder;
+	paymentOrder: PaymentOrderResponseDto;
 }
 
 export const PaymentCard: React.FC<Iprops> = ({ paymentOrder }) => {
 	const router = useRouter();
 	const {
-		description,
 		uuid,
-		amount,
-		status,
-		createdAt,
-		processedAt,
-		provider,
-		attempts,
-		countryIsoCode
+		attributes: {
+			description,
+			amount,
+			status,
+			created_at,
+			processed_at,
+			provider,
+			attempts,
+			country_iso_code
+		}
 	} = paymentOrder;
 
 	const onViewDetail = () => {
 		router.push(`/payments/${uuid}`);
 	};
 
-	const renderStatusBadge = (arg: string) => {
-		switch (arg) {
+	const renderStatusBadge = (status: string) => {
+		switch (status) {
 			case 'completed':
 				return (
-					<>
+					<Badge
+						variant="outline"
+						className="flex shrink-0 items-center gap-1 border-green-200 bg-green-100 text-green-800"
+					>
 						<CheckCircle className="h-3 w-3" />
 						<span className="text-xs">Completado</span>
-					</>
+					</Badge>
 				);
 			case 'failed':
 				return (
-					<>
+					<Badge
+						variant="outline"
+						className="flex shrink-0 items-center gap-1 border-red-200 bg-red-100 text-red-800"
+					>
 						<XCircle className="h-3 w-3" />
 						<span className="text-xs">Fallido</span>
-					</>
+					</Badge>
 				);
 			case 'pending':
 			default:
 				return (
-					<>
+					<Badge
+						variant="outline"
+						className="flex shrink-0 items-center gap-1 border-yellow-200 bg-yellow-100 text-yellow-800"
+					>
 						<Clock className="h-3 w-3" />
 						<span className="text-xs">Pendiente</span>
-					</>
+					</Badge>
 				);
 		}
 	};
@@ -70,32 +81,27 @@ export const PaymentCard: React.FC<Iprops> = ({ paymentOrder }) => {
 							<h3 className="mb-1 line-clamp-2 text-sm leading-tight font-medium">{description}</h3>
 							<p className="font-mono text-xs text-gray-500">{uuid.substring(0, 8)}...</p>
 						</div>
-						<div className="shrink-0">
-							<Badge
-								variant="outline"
-								className="flex shrink-0 items-center gap-1 border-green-200 bg-green-100 text-green-800"
-							>
-								{renderStatusBadge(status || 'pending')}
-							</Badge>
-						</div>
+						<div className="shrink-0">{renderStatusBadge(status || 'pending')}</div>
 					</div>
 
 					{/* Amount - más prominente */}
 					<div className="py-1 text-lg font-semibold text-blue-600">
-						{formatCurrency(amount, countryIsoCode || 'USD')}
+						{formatCurrency(amount, country_iso_code || 'USD')}
 					</div>
 
 					{/* Details en grid compacto */}
 					<div className="space-y-1.5 text-xs text-gray-600">
 						<div className="flex items-center gap-1.5">
 							<MapPin className="h-3 w-3 shrink-0" />
-							<span className="truncate">{countryIsoCode}</span>
+							<span className="truncate">{country_iso_code}</span>
 						</div>
 						<div className="flex items-center gap-1.5">
 							<Calendar className="h-3 w-3 shrink-0" />
 							<span className="truncate">
 								{status === 'pending' ? 'Creado: ' : 'Procesado: '}
-								{formatDate(status === 'pending' ? createdAt : processedAt || createdAt)}
+								{formatDate(
+									status === 'pending' ? new Date(created_at) : new Date(processed_at || created_at)
+								)}
 							</span>
 						</div>
 

@@ -471,14 +471,94 @@ Una vez ejecutado el setup automático:
 
 ### 🔧 Conexión a PostgreSQL desde PGAdmin
 
-1. **Acceder a PGAdmin**: http://localhost:8080
-2. **Login**: `admin@didactic.com` / `admin123`
-3. **Crear conexión nueva**:
-   - **Host**: `postgres` (nombre del contenedor)
-   - **Port**: `5432`
-   - **Database**: `didactic_succotash`
-   - **Username**: `didactic_user`
-   - **Password**: `didactic_password`
+#### 📋 Instrucciones Paso a Paso
+
+**1. Acceder a PGAdmin**
+
+- Abrir navegador en: http://localhost:8080
+- **Email**: `admin@didactic.com`
+- **Password**: `admin123`
+
+**2. Agregar Servidor PostgreSQL**
+
+- Click derecho en **"Servers"** en el panel izquierdo
+- Seleccionar **"Create" > "Server..."**
+
+**3. Configurar Conexión - Pestaña "General"**
+
+- **Name**: `Didactic Succotash DB` (o el nombre que prefieras)
+- **Comment**: `Base de datos del proyecto Didactic Succotash` (opcional)
+
+**4. Configurar Conexión - Pestaña "Connection"**
+
+- **Host name/address**: `postgres` ⚠️ (nombre del contenedor Docker)
+- **Port**: `5432`
+- **Maintenance database**: `didactic_succotash`
+- **Username**: `didactic_user`
+- **Password**: `didactic_password`
+- ✅ **Save password**: Marcar para no tener que ingresarla cada vez
+
+**5. Configurar Conexión - Pestaña "Advanced" (Opcional)**
+
+- **DB restriction**: `didactic_succotash` (para mostrar solo nuestra DB)
+
+**6. Guardar y Conectar**
+
+- Click en **"Save"**
+- El servidor debería aparecer en el panel izquierdo
+- Expandir para ver databases > didactic_succotash > schemas > public > tables
+
+#### 🔍 Verificar Conexión Exitosa
+
+Una vez conectado, deberías ver:
+
+```
+Servers
+└── Didactic Succotash DB
+    └── Databases
+        └── didactic_succotash
+            └── Schemas
+                └── public
+                    └── Tables
+                        ├── PaymentOrder
+                        ├── _prisma_migrations
+                        └── otras tablas...
+```
+
+#### ⚠️ Problemas Comunes de Conexión
+
+**Error: "could not connect to server"**
+
+- ✅ Verificar que Docker esté ejecutándose: `npm run docker:logs`
+- ✅ Verificar que PostgreSQL esté listo: Los logs deben mostrar "database system is ready to accept connections"
+
+**Error: "FATAL: database does not exist"**
+
+- ✅ Ejecutar setup completo: `npm run docker:clean && npm run docker:up`
+
+**Error: "FATAL: password authentication failed"**
+
+- ✅ Verificar credenciales en el archivo `.env`
+- ✅ Usuario: `didactic_user`, Password: `didactic_password`
+
+#### 💡 Funcionalidades Útiles en PGAdmin
+
+**Ver Datos de Tablas:**
+
+- Click derecho en tabla > **"View/Edit Data" > "All Rows"**
+
+**Ejecutar Consultas SQL:**
+
+- Click derecho en database > **"Query Tool"**
+- Ejemplo: `SELECT * FROM "PaymentOrder" LIMIT 10;`
+
+**Backup/Restore:**
+
+- Click derecho en database > **"Backup..."** / **"Restore..."**
+
+**Monitorear Actividad:**
+
+- Ir a **"Dashboard"** para ver métricas en tiempo real
 
 ### 🏗️ Servicios Docker Incluidos
 

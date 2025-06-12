@@ -283,15 +283,15 @@ Para probar el ruteo inteligente y los reintentos automáticos, puedes modificar
 ```typescript
 // Simulación de la confiabilidad de cada proveedor (% de éxito)
 const PROVIDER_RELIABILITY: Record<string, number> = {
-  // Configuraciones actuales
-  credit_card: 0.95,      // 95% éxito
-  pse: 0.9,              // 90% éxito
-  nequi: 0.89,           // 89% éxito
-  
-  // Para probar fallos y reintentos:
-  credit_card: 0.3,      // 30% éxito (muchos fallos)
-  pse: 0.1,              // 10% éxito (casi siempre falla)
-  nequi: 0.8,            // 80% éxito (backup más confiable)
+	// Configuraciones actuales
+	credit_card: 0.95, // 95% éxito
+	pse: 0.9, // 90% éxito
+	nequi: 0.89, // 89% éxito
+
+	// Para probar fallos y reintentos:
+	credit_card: 0.3, // 30% éxito (muchos fallos)
+	pse: 0.1, // 10% éxito (casi siempre falla)
+	nequi: 0.8 // 80% éxito (backup más confiable)
 };
 ```
 
@@ -325,12 +325,12 @@ npm run docker:logs | grep "Intentando procesar pago"
 
 ### 📊 Tasas de Éxito por Defecto
 
-| Método | Tasa Éxito | Uso |
-|--------|------------|-----|
-| 💳 Tarjetas | 93-95% | Pagos principales |
-| 🏦 Transferencias | 85-96% | PSE, PIX, ACH |
-| 📱 Billeteras | 84-91% | Nequi, PayPal |
-| 💵 Efectivo | 72-80% | OXXO, Rapipago |
+| Método            | Tasa Éxito | Uso               |
+| ----------------- | ---------- | ----------------- |
+| 💳 Tarjetas       | 93-95%     | Pagos principales |
+| 🏦 Transferencias | 85-96%     | PSE, PIX, ACH     |
+| 📱 Billeteras     | 84-91%     | Nequi, PayPal     |
+| 💵 Efectivo       | 72-80%     | OXXO, Rapipago    |
 
 **💡 Tip**: Bajar las tasas a 10-30% te permitirá ver el sistema de ruteo en acción con múltiples fallos y reintentos automáticos.
 

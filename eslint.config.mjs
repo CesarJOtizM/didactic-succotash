@@ -146,6 +146,27 @@ const eslintConfig = [
 		}
 	},
 	{
+		files: ['**/*.test.{js,jsx,ts,tsx}', '**/*.spec.{js,jsx,ts,tsx}', 'tests/**/*.{js,jsx,ts,tsx}'],
+		languageOptions: {
+			parser: tsParser,
+			globals: {
+				describe: 'readonly',
+				it: 'readonly',
+				test: 'readonly',
+				expect: 'readonly',
+				beforeEach: 'readonly',
+				afterEach: 'readonly',
+				beforeAll: 'readonly',
+				afterAll: 'readonly',
+				jest: 'readonly'
+			}
+		},
+		rules: {
+			'@typescript-eslint/no-explicit-any': 'warn', // Relajar en tests
+			'import/order': 'off' // Relajar orden de imports en tests
+		}
+	},
+	{
 		ignores: [
 			'node_modules',
 			'dist',

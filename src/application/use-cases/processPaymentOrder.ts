@@ -131,9 +131,10 @@ export const createProcessPaymentOrderUseCase = (
 
 			// En caso de error, también intentar actualizar el status a failed
 			try {
+				const currentOrder = await paymentOrderRepository.findByUuid(params.uuid);
 				await paymentOrderRepository.update(params.uuid, {
 					status: 'failed',
-					attempts: (await paymentOrderRepository.findByUuid(params.uuid))?.attempts || 0 + 1,
+					attempts: (currentOrder?.attempts || 0) + 1,
 					processedAt: new Date()
 				});
 			} catch (updateError) {

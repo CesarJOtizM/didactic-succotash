@@ -44,7 +44,9 @@ export const mapPaymentOrderToResponseDto = (
 		payment_url: `${baseUrl}/api/payment_order/${paymentOrder.uuid}`,
 		status: paymentOrder.status || 'completed',
 		provider: paymentOrder.provider || '',
-		attempts: paymentOrder.attempts || 0
+		attempts: paymentOrder.attempts || 0,
+		processed_at: paymentOrder.processedAt?.toISOString(),
+		transaction_id: paymentOrder.transactionId
 	},
 	available_payment_methods: availablePaymentMethods
 });

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 750">
+  <defs>
+    <style>
+      .title {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .subtitle {
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+      }
+
+      .small-text {
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+      }
+
+      .user-box {
+        fill: #1f77b4;
+        stroke: #1565c0;
+        stroke-width: 2;
+      }
+
+      .app-box {
+        fill: #2ca02c;
+        stroke: #1b5e20;
+        stroke-width: 2;
+      }
+
+      .frontend-box {
+        fill: #17a2b8;
+        stroke: #138496;
+        stroke-width: 2;
+      }
+
+      .api-box {
+        fill: #6610f2;
+        stroke: #520dc2;
+        stroke-width: 2;
+      }
+
+      .business-box {
+        fill: #fd7e14;
+        stroke: #e55a0e;
+        stroke-width: 2;
+      }
+
+      .db-box {
+        fill: #d62728;
+        stroke: #b71c1c;
+        stroke-width: 2;
+      }
+
+      .admin-box {
+        fill: #6f42c1;
+        stroke: #59359a;
+        stroke-width: 2;
+      }
+
+      .external-box {
+        fill: #ffc107;
+        stroke: #e0a800;
+        stroke-width: 2;
+      }
+
+      .text-white {
+        fill: white;
+      }
+
+      .text-black {
+        fill: black;
+      }
+
+      .arrow {
+        stroke: #333;
+        stroke-width: 2;
+        fill: none;
+        marker-end: url(#arrowhead);
+      }
+
+      .dotted-arrow {
+        stroke: #666;
+        stroke-width: 2;
+        fill: none;
+        stroke-dasharray: 5, 5;
+        marker-end: url(#arrowhead);
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="550" y="30" text-anchor="middle" class="title">Didactic Succotash - Diagrama de Contenedores C4</text>
+  <text x="550" y="50" text-anchor="middle" class="subtitle">Sistema de Orquestación de Pagos con Arquitectura
+    Hexagonal</text>
+
+  <!-- User -->
+  <rect x="50" y="80" width="140" height="70" rx="10" class="user-box" />
+  <text x="120" y="105" text-anchor="middle" class="subtitle text-white">👤 Usuario</text>
+  <text x="120" y="125" text-anchor="middle" class="small-text text-white">🌐 Navegador Web</text>
+  <text x="120" y="140" text-anchor="middle" class="small-text text-white">React Frontend</text>
+
+  <!-- Main Application Group -->
+  <rect x="220" y="60" width="580" height="370" rx="15" class="app-box" />
+  <text x="510" y="85" text-anchor="middle" class="title text-white">Didactic Succotash [Next.js 15 Application]</text>
+
+  <!-- Frontend Container -->
+  <rect x="240" y="100" width="160" height="90" rx="8" class="frontend-box" />
+  <text x="320" y="120" text-anchor="middle" class="subtitle text-white">Frontend Container</text>
+  <text x="320" y="135" text-anchor="middle" class="small-text text-white">⚛️ Next.js + React 19</text>
+  <text x="320" y="150" text-anchor="middle" class="small-text text-white">Server-Side Rendering</text>
+  <text x="320" y="165" text-anchor="middle" class="small-text text-white">Tailwind CSS</text>
+  <text x="320" y="180" text-anchor="middle" class="small-text text-white">Puerto 3000</text>
+
+  <!-- API Container -->
+  <rect x="420" y="100" width="160" height="90" rx="8" class="api-box" />
+  <text x="500" y="120" text-anchor="middle" class="subtitle text-white">API Container</text>
+  <text x="500" y="135" text-anchor="middle" class="small-text text-white">🔌 REST API Routes</text>
+  <text x="500" y="150" text-anchor="middle" class="small-text text-white">/api/payment_order/*</text>
+  <text x="500" y="165" text-anchor="middle" class="small-text text-white">/api/payment_methods/[country]</text>
+  <text x="500" y="180" text-anchor="middle" class="small-text text-white">/api/health</text>
+
+  <!-- Health Check Container -->
+  <rect x="600" y="100" width="160" height="90" rx="8" class="api-box" />
+  <text x="680" y="120" text-anchor="middle" class="subtitle text-white">Monitoring Container</text>
+  <text x="680" y="135" text-anchor="middle" class="small-text text-white">📊 Health Checks</text>
+  <text x="680" y="150" text-anchor="middle" class="small-text text-white">System Status</text>
+  <text x="680" y="165" text-anchor="middle" class="small-text text-white">Service Monitoring</text>
+
+  <!-- Business Logic Group -->
+  <rect x="240" y="210" width="520" height="200" rx="8" class="business-box" />
+  <text x="500" y="230" text-anchor="middle" class="subtitle text-white">Business Logic - Arquitectura Hexagonal</text>
+
+  <!-- Domain Layer -->
+  <rect x="260" y="250" width="140" height="70" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="330" y="270" text-anchor="middle" class="small-text text-white">🏗️ Domain Layer</text>
+  <text x="330" y="285" text-anchor="middle" class="small-text text-white">PaymentOrder Entity</text>
+  <text x="330" y="300" text-anchor="middle" class="small-text text-white">PaymentMethod Entity</text>
+  <text x="330" y="315" text-anchor="middle" class="small-text text-white">Business Rules</text>
+
+  <!-- Application Layer -->
+  <rect x="420" y="250" width="140" height="70" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="490" y="270" text-anchor="middle" class="small-text text-white">📋 Application Layer</text>
+  <text x="490" y="285" text-anchor="middle" class="small-text text-white">Use Cases + DTOs</text>
+  <text x="490" y="300" text-anchor="middle" class="small-text text-white">Payment Processing</text>
+  <text x="490" y="315" text-anchor="middle" class="small-text text-white">Smart Routing</text>
+
+  <!-- Infrastructure Layer -->
+  <rect x="580" y="250" width="140" height="70" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="650" y="270" text-anchor="middle" class="small-text text-white">🔧 Infrastructure Layer</text>
+  <text x="650" y="285" text-anchor="middle" class="small-text text-white">Repositories + Adapters</text>
+  <text x="650" y="300" text-anchor="middle" class="small-text text-white">Payment Providers</text>
+  <text x="650" y="315" text-anchor="middle" class="small-text text-white">External Services</text>
+
+  <!-- Payment Method Service -->
+  <rect x="260" y="340" width="140" height="60" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="330" y="360" text-anchor="middle" class="small-text text-white">🌍 Payment Methods</text>
+  <text x="330" y="375" text-anchor="middle" class="small-text text-white">Multi-Country Support</text>
+  <text x="330" y="390" text-anchor="middle" class="small-text text-white">6 Countries: CO,MX,BR,US,AR,CL</text>
+
+  <!-- Smart Routing Service -->
+  <rect x="420" y="340" width="140" height="60" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="490" y="360" text-anchor="middle" class="small-text text-white">🧠 Smart Routing</text>
+  <text x="490" y="375" text-anchor="middle" class="small-text text-white">Provider Fallback</text>
+  <text x="490" y="390" text-anchor="middle" class="small-text text-white">Automatic Retry Logic</text>
+
+  <!-- Mock Service -->
+  <rect x="580" y="340" width="140" height="60" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="650" y="360" text-anchor="middle" class="small-text text-white">🎭 Mock Providers</text>
+  <text x="650" y="375" text-anchor="middle" class="small-text text-white">Stripe, PayPal, PSE</text>
+  <text x="650" y="390" text-anchor="middle" class="small-text text-white">Simulated Responses</text>
+
+  <!-- Database -->
+  <rect x="250" y="480" width="150" height="90" rx="10" class="db-box" />
+  <text x="325" y="505" text-anchor="middle" class="subtitle text-white">Base de Datos</text>
+  <text x="325" y="525" text-anchor="middle" class="small-text text-white">🗄️ PostgreSQL 16</text>
+  <text x="325" y="540" text-anchor="middle" class="small-text text-white">didactic_succotash</text>
+  <text x="325" y="555" text-anchor="middle" class="small-text text-white">Prisma ORM</text>
+  <text x="325" y="570" text-anchor="middle" class="small-text text-white">Puerto 5432</text>
+
+  <!-- PGAdmin -->
+  <rect x="450" y="480" width="150" height="90" rx="10" class="admin-box" />
+  <text x="525" y="505" text-anchor="middle" class="subtitle text-white">Admin Tools</text>
+  <text x="525" y="525" text-anchor="middle" class="small-text text-white">🔧 PGAdmin 4</text>
+  <text x="525" y="540" text-anchor="middle" class="small-text text-white">Database Management</text>
+  <text x="525" y="555" text-anchor="middle" class="small-text text-white">Query Interface</text>
+  <text x="525" y="570" text-anchor="middle" class="small-text text-white">Puerto 8080</text>
+
+  <!-- Docker -->
+  <rect x="650" y="480" width="150" height="90" rx="10" class="admin-box" />
+  <text x="725" y="505" text-anchor="middle" class="subtitle text-white">DevOps</text>
+  <text x="725" y="525" text-anchor="middle" class="small-text text-white">🐳 Docker Compose</text>
+  <text x="725" y="540" text-anchor="middle" class="small-text text-white">Auto Setup</text>
+  <text x="725" y="555" text-anchor="middle" class="small-text text-white">Health Checks</text>
+  <text x="725" y="570" text-anchor="middle" class="small-text text-white">Volume Persistence</text>
+
+  <!-- External Payment Providers -->
+  <rect x="850" y="180" width="200" height="150" rx="10" class="external-box" />
+  <text x="950" y="205" text-anchor="middle" class="subtitle text-black">Payment Providers</text>
+  <text x="950" y="225" text-anchor="middle" class="small-text text-black">🏦 Stripe (Mock)</text>
+  <text x="950" y="240" text-anchor="middle" class="small-text text-black">💳 PayPal (Mock)</text>
+  <text x="950" y="255" text-anchor="middle" class="small-text text-black">🇨🇴 PSE (Mock)</text>
+  <text x="950" y="270" text-anchor="middle" class="small-text text-black">🇧🇷 PIX (Mock)</text>
+  <text x="950" y="285" text-anchor="middle" class="small-text text-black">🇲🇽 SPEI (Mock)</text>
+  <text x="950" y="300" text-anchor="middle" class="small-text text-black">🇺🇸 ACH (Mock)</text>
+  <text x="950" y="315" text-anchor="middle" class="small-text text-black">Simulated Success/Failure</text>
+
+  <!-- Arrows -->
+  <!-- Browser to Next.js -->
+  <path d="M 190 115 L 240 130" class="arrow" />
+  <text x="215" y="120" text-anchor="middle" class="small-text">HTTPS</text>
+
+  <!-- Next.js to API -->
+  <path d="M 400 145 L 420 145" class="arrow" />
+  <text x="410" y="140" text-anchor="middle" class="small-text">SSR</text>
+
+  <!-- API to Application -->
+  <path d="M 500 190 L 490 250" class="arrow" />
+
+  <!-- API to Health -->
+  <path d="M 580 145 L 600 145" class="arrow" />
+
+  <!-- Application to Domain -->
+  <path d="M 460 285 L 400 285" class="arrow" />
+
+  <!-- Application to Infrastructure -->
+  <path d="M 540 285 L 580 285" class="arrow" />
+
+  <!-- Infrastructure to Database -->
+  <path d="M 620 320 Q 500 400 400 480" class="arrow" />
+
+  <!-- Infrastructure to External -->
+  <path d="M 720 285 L 850 255" class="dotted-arrow" />
+  <text x="785" y="265" text-anchor="middle" class="small-text">API Calls</text>
+
+  <!-- Payment Methods to Mock -->
+  <path d="M 400 370 Q 650 400 850 290" class="dotted-arrow" />
+  <text x="625" y="385" text-anchor="middle" class="small-text">Country Methods</text>
+
+  <!-- PGAdmin to Database -->
+  <path d="M 450 525 L 400 525" class="arrow" />
+</svg>

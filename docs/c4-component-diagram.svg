@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1300 900">
+  <defs>
+    <style>
+      .title {
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .subtitle {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+      }
+
+      .small-text {
+        font-family: Arial, sans-serif;
+        font-size: 9px;
+      }
+
+      .app-container {
+        fill: #2ca02c;
+        stroke: #1b5e20;
+        stroke-width: 3;
+      }
+
+      .presentation-layer {
+        fill: #17a2b8;
+        stroke: #138496;
+        stroke-width: 2;
+      }
+
+      .application-layer {
+        fill: #6610f2;
+        stroke: #520dc2;
+        stroke-width: 2;
+      }
+
+      .domain-layer {
+        fill: #fd7e14;
+        stroke: #e55a0e;
+        stroke-width: 2;
+      }
+
+      .infrastructure-layer {
+        fill: #d62728;
+        stroke: #b71c1c;
+        stroke-width: 2;
+      }
+
+      .component-box {
+        fill: rgba(255, 255, 255, 0.2);
+        stroke: rgba(255, 255, 255, 0.4);
+        stroke-width: 1;
+      }
+
+      .text-white {
+        fill: white;
+      }
+
+      .text-black {
+        fill: black;
+      }
+
+      .arrow {
+        stroke: #333;
+        stroke-width: 2;
+        fill: none;
+        marker-end: url(#arrowhead);
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="650" y="30" text-anchor="middle" class="title">Didactic Succotash - Diagrama de Componentes C4</text>
+  <text x="650" y="50" text-anchor="middle" class="subtitle">Arquitectura Hexagonal Detallada - Componentes
+    Implementados</text>
+
+  <!-- Main Container -->
+  <rect x="50" y="80" width="1200" height="780" rx="20" class="app-container" />
+  <text x="650" y="105" text-anchor="middle" class="title text-white">Next.js 15 Application Container</text>
+
+  <!-- Presentation Layer -->
+  <rect x="80" y="130" width="560" height="180" rx="10" class="presentation-layer" />
+  <text x="360" y="155" text-anchor="middle" class="subtitle text-white">Presentation Layer (Next.js + React 19)</text>
+
+  <!-- Pages -->
+  <rect x="100" y="170" width="120" height="100" rx="5" class="component-box" />
+  <text x="160" y="190" text-anchor="middle" class="small-text text-white">📄 Pages</text>
+  <text x="160" y="205" text-anchor="middle" class="small-text text-white">page.tsx</text>
+  <text x="160" y="220" text-anchor="middle" class="small-text text-white">layout.tsx</text>
+  <text x="160" y="235" text-anchor="middle" class="small-text text-white">/payments/[uuid]</text>
+  <text x="160" y="250" text-anchor="middle" class="small-text text-white">Server Components</text>
+
+  <!-- UI Components -->
+  <rect x="240" y="170" width="120" height="100" rx="5" class="component-box" />
+  <text x="300" y="190" text-anchor="middle" class="small-text text-white">🧩 UI Components</text>
+  <text x="300" y="205" text-anchor="middle" class="small-text text-white">PaymentDetails</text>
+  <text x="300" y="220" text-anchor="middle" class="small-text text-white">PaymentForm</text>
+  <text x="300" y="235" text-anchor="middle" class="small-text text-white">PaymentMethodCard</text>
+  <text x="300" y="250" text-anchor="middle" class="small-text text-white">Button, Card, Input</text>
+
+  <!-- API Routes -->
+  <rect x="380" y="170" width="120" height="100" rx="5" class="component-box" />
+  <text x="440" y="190" text-anchor="middle" class="small-text text-white">🔌 API Routes</text>
+  <text x="440" y="205" text-anchor="middle" class="small-text text-white">/payment_order</text>
+  <text x="440" y="220" text-anchor="middle" class="small-text text-white">/payment_order/[uuid]</text>
+  <text x="440" y="235" text-anchor="middle" class="small-text text-white">/payment_methods/[country]</text>
+  <text x="440" y="250" text-anchor="middle" class="small-text text-white">/health</text>
+
+  <!-- Hooks -->
+  <rect x="520" y="170" width="100" height="100" rx="5" class="component-box" />
+  <text x="570" y="190" text-anchor="middle" class="small-text text-white">⚛️ Hooks</text>
+  <text x="570" y="205" text-anchor="middle" class="small-text text-white">usePaymentForm</text>
+  <text x="570" y="220" text-anchor="middle" class="small-text text-white">Custom Hooks</text>
+  <text x="570" y="235" text-anchor="middle" class="small-text text-white">State Management</text>
+
+  <!-- Application Layer -->
+  <rect x="680" y="130" width="540" height="180" rx="10" class="application-layer" />
+  <text x="950" y="155" text-anchor="middle" class="subtitle text-white">Application Layer</text>
+
+  <!-- Use Cases -->
+  <rect x="700" y="170" width="130" height="100" rx="5" class="component-box" />
+  <text x="765" y="190" text-anchor="middle" class="small-text text-white">📋 Use Cases</text>
+  <text x="765" y="205" text-anchor="middle" class="small-text text-white">createPaymentOrder</text>
+  <text x="765" y="220" text-anchor="middle" class="small-text text-white">getPaymentOrder</text>
+  <text x="765" y="235" text-anchor="middle" class="small-text text-white">processPayment</text>
+  <text x="765" y="250" text-anchor="middle" class="small-text text-white">getPaymentMethods</text>
+
+  <!-- DTOs -->
+  <rect x="850" y="170" width="130" height="100" rx="5" class="component-box" />
+  <text x="915" y="190" text-anchor="middle" class="small-text text-white">📦 DTOs</text>
+  <text x="915" y="205" text-anchor="middle" class="small-text text-white">PaymentOrderDto</text>
+  <text x="915" y="220" text-anchor="middle" class="small-text text-white">PaymentMethodDto</text>
+  <text x="915" y="235" text-anchor="middle" class="small-text text-white">ProcessPaymentDto</text>
+  <text x="915" y="250" text-anchor="middle" class="small-text text-white">Response Mappers</text>
+
+  <!-- Ports -->
+  <rect x="1000" y="170" width="130" height="100" rx="5" class="component-box" />
+  <text x="1065" y="190" text-anchor="middle" class="small-text text-white">🔌 Ports</text>
+  <text x="1065" y="205" text-anchor="middle" class="small-text text-white">PaymentRepository</text>
+  <text x="1065" y="220" text-anchor="middle" class="small-text text-white">PaymentProvider</text>
+  <text x="1065" y="235" text-anchor="middle" class="small-text text-white">NotificationService</text>
+  <text x="1065" y="250" text-anchor="middle" class="small-text text-white">Interfaces</text>
+
+  <!-- Schemas -->
+  <rect x="1150" y="170" width="100" height="100" rx="5" class="component-box" />
+  <text x="1200" y="190" text-anchor="middle" class="small-text text-white">📋 Schemas</text>
+  <text x="1200" y="205" text-anchor="middle" class="small-text text-white">Zod Validation</text>
+  <text x="1200" y="220" text-anchor="middle" class="small-text text-white">Input Validation</text>
+  <text x="1200" y="235" text-anchor="middle" class="small-text text-white">Type Safety</text>
+
+  <!-- Domain Layer -->
+  <rect x="80" y="340" width="560" height="220" rx="10" class="domain-layer" />
+  <text x="360" y="365" text-anchor="middle" class="subtitle text-white">Domain Layer (Pure Business Logic)</text>
+
+  <!-- Entities -->
+  <rect x="100" y="380" width="130" height="120" rx="5" class="component-box" />
+  <text x="165" y="400" text-anchor="middle" class="small-text text-white">🏗️ Entities</text>
+  <text x="165" y="415" text-anchor="middle" class="small-text text-white">PaymentOrder</text>
+  <text x="165" y="430" text-anchor="middle" class="small-text text-white">PaymentMethod</text>
+  <text x="165" y="445" text-anchor="middle" class="small-text text-white">Business Rules</text>
+  <text x="165" y="460" text-anchor="middle" class="small-text text-white">Validation Logic</text>
+  <text x="165" y="475" text-anchor="middle" class="small-text text-white">Entity Helpers</text>
+
+  <!-- Value Objects -->
+  <rect x="250" y="380" width="130" height="120" rx="5" class="component-box" />
+  <text x="315" y="400" text-anchor="middle" class="small-text text-white">💎 Value Objects</text>
+  <text x="315" y="415" text-anchor="middle" class="small-text text-white">Money</text>
+  <text x="315" y="430" text-anchor="middle" class="small-text text-white">OrderId (UUID)</text>
+  <text x="315" y="445" text-anchor="middle" class="small-text text-white">CountryCode</text>
+  <text x="315" y="460" text-anchor="middle" class="small-text text-white">Amount</text>
+  <text x="315" y="475" text-anchor="middle" class="small-text text-white">Immutable Objects</text>
+
+  <!-- Domain Services -->
+  <rect x="400" y="380" width="130" height="120" rx="5" class="component-box" />
+  <text x="465" y="400" text-anchor="middle" class="small-text text-white">⚙️ Domain Services</text>
+  <text x="465" y="415" text-anchor="middle" class="small-text text-white">PaymentProcessor</text>
+  <text x="465" y="430" text-anchor="middle" class="small-text text-white">SmartRouting</text>
+  <text x="465" y="445" text-anchor="middle" class="small-text text-white">Provider Selection</text>
+  <text x="465" y="460" text-anchor="middle" class="small-text text-white">Fallback Logic</text>
+  <text x="465" y="475" text-anchor="middle" class="small-text text-white">Cross-Entity Logic</text>
+
+  <!-- Business Rules -->
+  <rect x="100" y="520" width="430" height="30" rx="5" class="component-box" />
+  <text x="315" y="540" text-anchor="middle" class="small-text text-white">💡 Business Rules: Amount validation •
+    Country support • Payment method eligibility • Provider reliability</text>
+
+  <!-- Infrastructure Layer -->
+  <rect x="680" y="340" width="540" height="220" rx="10" class="infrastructure-layer" />
+  <text x="950" y="365" text-anchor="middle" class="subtitle text-white">Infrastructure Layer</text>
+
+  <!-- Repositories -->
+  <rect x="700" y="380" width="130" height="120" rx="5" class="component-box" />
+  <text x="765" y="400" text-anchor="middle" class="small-text text-white">🗃️ Repositories</text>
+  <text x="765" y="415" text-anchor="middle" class="small-text text-white">PaymentOrderRepo</text>
+  <text x="765" y="430" text-anchor="middle" class="small-text text-white">Prisma Client</text>
+  <text x="765" y="445" text-anchor="middle" class="small-text text-white">Database Access</text>
+  <text x="765" y="460" text-anchor="middle" class="small-text text-white">CRUD Operations</text>
+  <text x="765" y="475" text-anchor="middle" class="small-text text-white">Query Optimization</text>
+
+  <!-- Adapters -->
+  <rect x="850" y="380" width="130" height="120" rx="5" class="component-box" />
+  <text x="915" y="400" text-anchor="middle" class="small-text text-white">🔧 Adapters</text>
+  <text x="915" y="415" text-anchor="middle" class="small-text text-white">PaymentProviders</text>
+  <text x="915" y="430" text-anchor="middle" class="small-text text-white">API Clients</text>
+  <text x="915" y="445" text-anchor="middle" class="small-text text-white">External Services</text>
+  <text x="915" y="460" text-anchor="middle" class="small-text text-white">HTTP Clients</text>
+  <text x="915" y="475" text-anchor="middle" class="small-text text-white">Response Mapping</text>
+
+  <!-- Mock Services -->
+  <rect x="1000" y="380" width="130" height="120" rx="5" class="component-box" />
+  <text x="1065" y="400" text-anchor="middle" class="small-text text-white">🎭 Mock Services</text>
+  <text x="1065" y="415" text-anchor="middle" class="small-text text-white">PaymentMocks</text>
+  <text x="1065" y="430" text-anchor="middle" class="small-text text-white">6 Countries Support</text>
+  <text x="1065" y="445" text-anchor="middle" class="small-text text-white">Method Simulation</text>
+  <text x="1065" y="460" text-anchor="middle" class="small-text text-white">Success/Error Rates</text>
+  <text x="1065" y="475" text-anchor="middle" class="small-text text-white">Test Data</text>
+
+  <!-- Configuration -->
+  <rect x="1150" y="380" width="100" height="120" rx="5" class="component-box" />
+  <text x="1200" y="400" text-anchor="middle" class="small-text text-white">⚙️ Config</text>
+  <text x="1200" y="415" text-anchor="middle" class="small-text text-white">Database URL</text>
+  <text x="1200" y="430" text-anchor="middle" class="small-text text-white">Environment</text>
+  <text x="1200" y="445" text-anchor="middle" class="small-text text-white">API Keys</text>
+  <text x="1200" y="460" text-anchor="middle" class="small-text text-white">Provider URLs</text>
+
+  <!-- Database Layer -->
+  <rect x="80" y="590" width="300" height="140" rx="10" class="infrastructure-layer" />
+  <text x="230" y="615" text-anchor="middle" class="subtitle text-white">Database Layer</text>
+
+  <!-- PostgreSQL -->
+  <rect x="100" y="640" width="120" height="80" rx="5" class="component-box" />
+  <text x="160" y="660" text-anchor="middle" class="small-text text-white">🗄️ PostgreSQL 16</text>
+  <text x="160" y="675" text-anchor="middle" class="small-text text-white">payment_orders</text>
+  <text x="160" y="690" text-anchor="middle" class="small-text text-white">Transactions</text>
+  <text x="160" y="705" text-anchor="middle" class="small-text text-white">ACID Properties</text>
+
+  <!-- Prisma -->
+  <rect x="240" y="640" width="120" height="80" rx="5" class="component-box" />
+  <text x="300" y="660" text-anchor="middle" class="small-text text-white">🔄 Prisma ORM</text>
+  <text x="300" y="675" text-anchor="middle" class="small-text text-white">Schema</text>
+  <text x="300" y="690" text-anchor="middle" class="small-text text-white">Migrations</text>
+  <text x="300" y="705" text-anchor="middle" class="small-text text-white">Type Safety</text>
+
+  <!-- External Services Layer -->
+  <rect x="400" y="590" width="440" height="140" rx="10" class="external-box" />
+  <text x="620" y="615" text-anchor="middle" class="subtitle text-black">External Payment Providers (Mocked)</text>
+
+  <!-- Provider Types -->
+  <rect x="420" y="640" width="100" height="80" rx="5" class="component-box" />
+  <text x="470" y="660" text-anchor="middle" class="small-text text-white">🏦 Banking</text>
+  <text x="470" y="675" text-anchor="middle" class="small-text text-white">PSE, SPEI</text>
+  <text x="470" y="690" text-anchor="middle" class="small-text text-white">PIX, ACH</text>
+  <text x="470" y="705" text-anchor="middle" class="small-text text-white">Bank Transfers</text>
+
+  <rect x="540" y="640" width="100" height="80" rx="5" class="component-box" />
+  <text x="590" y="660" text-anchor="middle" class="small-text text-white">💳 Cards</text>
+  <text x="590" y="675" text-anchor="middle" class="small-text text-white">Credit Cards</text>
+  <text x="590" y="690" text-anchor="middle" class="small-text text-white">Debit Cards</text>
+  <text x="590" y="705" text-anchor="middle" class="small-text text-white">Global Providers</text>
+
+  <rect x="660" y="640" width="100" height="80" rx="5" class="component-box" />
+  <text x="710" y="660" text-anchor="middle" class="small-text text-white">📱 Digital</text>
+  <text x="710" y="675" text-anchor="middle" class="small-text text-white">Nequi, DaviPlata</text>
+  <text x="710" y="690" text-anchor="middle" class="small-text text-white">PayPal, MACH</text>
+  <text x="710" y="705" text-anchor="middle" class="small-text text-white">Digital Wallets</text>
+
+  <rect x="780" y="640" width="100" height="80" rx="5" class="component-box" />
+  <text x="830" y="660" text-anchor="middle" class="small-text text-white">💵 Cash</text>
+  <text x="830" y="675" text-anchor="middle" class="small-text text-white">OXXO, Rapipago</text>
+  <text x="830" y="690" text-anchor="middle" class="small-text text-white">Servipag, Boleto</text>
+  <text x="830" y="705" text-anchor="middle" class="small-text text-white">Cash Payments</text>
+
+  <!-- Testing Layer -->
+  <rect x="860" y="590" width="360" height="140" rx="10" class="app-container" />
+  <text x="1040" y="615" text-anchor="middle" class="subtitle text-white">Testing Layer (91 Tests)</text>
+
+  <!-- Unit Tests -->
+  <rect x="880" y="640" width="110" height="80" rx="5" class="component-box" />
+  <text x="935" y="660" text-anchor="middle" class="small-text text-white">🧪 Unit Tests</text>
+  <text x="935" y="675" text-anchor="middle" class="small-text text-white">DTOs Testing</text>
+  <text x="935" y="690" text-anchor="middle" class="small-text text-white">Entity Validation</text>
+  <text x="935" y="705" text-anchor="middle" class="small-text text-white">Business Logic</text>
+
+  <!-- Integration Tests -->
+  <rect x="1010" y="640" width="110" height="80" rx="5" class="component-box" />
+  <text x="1065" y="660" text-anchor="middle" class="small-text text-white">🔗 Integration</text>
+  <text x="1065" y="675" text-anchor="middle" class="small-text text-white">API Testing</text>
+  <text x="1065" y="690" text-anchor="middle" class="small-text text-white">Database Tests</text>
+  <text x="1065" y="705" text-anchor="middle" class="small-text text-white">End-to-End</text>
+
+  <!-- Test Helpers -->
+  <rect x="1140" y="640" width="100" height="80" rx="5" class="component-box" />
+  <text x="1190" y="660" text-anchor="middle" class="small-text text-white">🔧 Test Utils</text>
+  <text x="1190" y="675" text-anchor="middle" class="small-text text-white">Mock Factories</text>
+  <text x="1190" y="690" text-anchor="middle" class="small-text text-white">Test Helpers</text>
+  <text x="1190" y="705" text-anchor="middle" class="small-text text-white">Setup Utils</text>
+
+  <!-- Flow Arrows -->
+  <!-- Pages to API -->
+  <path d="M 220 220 L 380 220" class="arrow" />
+
+  <!-- Pages to Components -->
+  <path d="M 220 220 L 240 220" class="arrow" />
+
+  <!-- API to Use Cases -->
+  <path d="M 500 220 L 700 220" class="arrow" />
+
+  <!-- Use Cases to DTOs -->
+  <path d="M 830 220 L 850 220" class="arrow" />
+
+  <!-- Use Cases to Ports -->
+  <path d="M 830 220 L 1000 220" class="arrow" />
+
+  <!-- Use Cases to Domain -->
+  <path d="M 765 270 Q 500 320 315 380" class="arrow" />
+
+  <!-- Entities to Value Objects -->
+  <path d="M 230 440 L 250 440" class="arrow" />
+
+  <!-- Domain Services to Entities -->
+  <path d="M 400 440 L 230 440" class="arrow" />
+
+  <!-- Ports to Repositories -->
+  <path d="M 1065 270 Q 950 320 830 380" class="arrow" />
+
+  <!-- Ports to Adapters -->
+  <path d="M 1065 270 L 980 380" class="arrow" />
+
+  <!-- Repositories to Database -->
+  <path d="M 700 440 Q 400 540 300 640" class="arrow" />
+
+  <!-- Adapters to External -->
+  <path d="M 915 500 Q 800 550 620 640" class="arrow" />
+
+  <!-- Mock to External -->
+  <path d="M 1065 500 Q 900 550 750 640" class="arrow" />
+</svg>

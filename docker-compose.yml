@@ -1,0 +1,105 @@
+services:
+  # Base de datos PostgreSQL
+  postgres:
+    image: postgres:16-alpine
+    container_name: didactic-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-didactic_succotash}
+      POSTGRES_USER: ${POSTGRES_USER:-didactic_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-didactic_password}
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U didactic_user -d didactic_succotash']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - didactic-network
+
+  # Aplicación Next.js
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    container_name: didactic-web
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+      - DATABASE_URL=${DATABASE_URL:-postgresql://didactic_user:didactic_password@postgres:5432/didactic_succotash}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:3000}
+    volumes:
+      - .:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ['CMD-SHELL', 'curl -f http://localhost:3000/api/health || exit 1']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - didactic-network
+    command: >
+      sh -c "
+        echo '🚀 Iniciando configuración automática...';
+        while ! pg_isready -h postgres -p 5432 -U didactic_user -d didactic_succotash; do
+          echo 'Esperando PostgreSQL...';
+          sleep 2;
+        done;
+        echo '✅ PostgreSQL listo!';
+        echo '🔧 Generando cliente Prisma...';
+        bun run db:generate;
+        echo '📊 Configurando base de datos...';
+        
+        # Verificar si existen migraciones
+        if [ ! -d 'src/prisma/migrations' ] || [ ! \"$(ls -A src/prisma/migrations)\" ]; then
+          echo '📝 No se encontraron migraciones, creando migración inicial...';
+          bun run db:migrate:dev --name init;
+        else
+          echo '📋 Aplicando migraciones existentes...';
+          bun run db:migrate || bun run db:push;
+        fi;
+        
+        echo '✅ Base de datos configurada!';
+        echo '🌐 Iniciando aplicación...';
+        echo '===============================================';
+        echo '🎉 APLICACIÓN LISTA PARA USAR 🎉';
+        echo '===============================================';
+        echo '📱 Aplicación: http://localhost:3000';
+        echo '🗄️  PGAdmin: http://localhost:8080';
+        echo '   - Email: admin@didactic.com';
+        echo '   - Password: admin123';
+        echo '===============================================';
+        exec bun run dev;
+      "
+
+  # PGAdmin para administrar la base de datos (opcional)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: didactic-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@didactic.com}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin123}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - '8080:80'
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - didactic-network
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+
+networks:
+  didactic-network:
+    driver: bridge

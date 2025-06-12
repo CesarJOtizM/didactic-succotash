@@ -113,6 +113,24 @@ o siempre retornar error (simulado/mockeado).
 - **Endpoint:** `POST /api/payment_order/:uuid
 - Requerimiento adicional: El backend debe implementar un "ruteo inteligente", que ante el fallo de un método de pago, seleccione automáticamente otro proveedor disponible para asegurar el éxito de la transacción.
 - Bonus: guardar métricas de las transacciones y requests.
+- **Response ejemplo**
+- Success:
+
+```json
+{
+	"status": "success",
+	"transaction_id": "12345678-1234-5678-1234-567812345678"
+}
+```
+
+- Error:
+
+```json
+{
+	"status": "Error",
+	"transaction_id": "12345678-1234-5678-1234-567812345678"
+}
+```
 
 ## **Estructura del Frontend**
 

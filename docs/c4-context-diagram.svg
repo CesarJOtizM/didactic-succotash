@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 650">
   <defs>
     <style>
       .title {
@@ -66,62 +66,107 @@
   </defs>
 
   <!-- Title -->
-  <text x="400" y="30" text-anchor="middle" class="title">Didactic Succotash - Diagrama de Contexto C4</text>
+  <text x="450" y="30" text-anchor="middle" class="title">Didactic Succotash - Diagrama de Contexto C4</text>
+  <text x="450" y="50" text-anchor="middle" class="subtitle">Sistema de Orquestación de Pagos Multi-País</text>
 
   <!-- Users Group -->
-  <rect x="50" y="80" width="200" height="150" rx="10" class="user-box" />
-  <text x="150" y="105" text-anchor="middle" class="title text-white">Sistema Didactic Succotash</text>
+  <rect x="50" y="100" width="200" height="180" rx="10" class="user-box" />
+  <text x="150" y="125" text-anchor="middle" class="title text-white">Actores del Sistema</text>
 
   <!-- User -->
-  <rect x="70" y="120" width="160" height="40" rx="5" fill="rgba(255,255,255,0.2)" />
-  <text x="150" y="135" text-anchor="middle" class="subtitle text-white">👤 Usuario</text>
-  <text x="150" y="150" text-anchor="middle" class="subtitle text-white">Administra órdenes de pago</text>
+  <rect x="70" y="140" width="160" height="50" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="150" y="160" text-anchor="middle" class="subtitle text-white">👤 Usuario Final</text>
+  <text x="150" y="175" text-anchor="middle" class="subtitle text-white">Crea y procesa órdenes de pago</text>
 
   <!-- Admin -->
-  <rect x="70" y="170" width="160" height="40" rx="5" fill="rgba(255,255,255,0.2)" />
-  <text x="150" y="185" text-anchor="middle" class="subtitle text-white">👨‍💼 Administrador</text>
-  <text x="150" y="200" text-anchor="middle" class="subtitle text-white">Administra base de datos</text>
+  <rect x="70" y="200" width="160" height="50" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="150" y="220" text-anchor="middle" class="subtitle text-white">👨‍💼 Administrador</text>
+  <text x="150" y="235" text-anchor="middle" class="subtitle text-white">Gestiona base de datos</text>
 
   <!-- Main System -->
-  <rect x="300" y="150" width="200" height="100" rx="10" class="system-box" />
-  <text x="400" y="175" text-anchor="middle" class="title text-white">🌐 Aplicación Web</text>
-  <text x="400" y="195" text-anchor="middle" class="subtitle text-white">Next.js + React</text>
-  <text x="400" y="210" text-anchor="middle" class="subtitle text-white">Gestión de órdenes de pago</text>
-  <text x="400" y="235" text-anchor="middle" class="subtitle text-white">Didactic Succotash System</text>
+  <rect x="300" y="160" width="250" height="150" rx="10" class="system-box" />
+  <text x="425" y="185" text-anchor="middle" class="title text-white">🌐 Didactic Succotash</text>
+  <text x="425" y="205" text-anchor="middle" class="subtitle text-white">Sistema de Orquestación de Pagos</text>
+  <text x="425" y="225" text-anchor="middle" class="subtitle text-white">Next.js + React + TypeScript</text>
 
-  <!-- External Systems -->
-  <rect x="550" y="80" width="200" height="80" rx="10" class="external-box" />
-  <text x="650" y="105" text-anchor="middle" class="title text-white">Sistemas Externos</text>
-  <text x="650" y="130" text-anchor="middle" class="subtitle text-white">💳 Pasarela de Pagos</text>
-  <text x="650" y="145" text-anchor="middle" class="subtitle text-white">Procesa pagos</text>
+  <!-- System capabilities -->
+  <rect x="320" y="240" width="210" height="60" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="425" y="255" text-anchor="middle" class="subtitle text-white">✨ Capacidades Clave:</text>
+  <text x="425" y="270" text-anchor="middle" class="subtitle text-white">• Soporte 6 países (CO, MX, BR, US, AR,
+    CL)</text>
+  <text x="425" y="285" text-anchor="middle" class="subtitle text-white">• Ruteo inteligente de proveedores</text>
+
+  <!-- External Payment Providers -->
+  <rect x="600" y="80" width="220" height="120" rx="10" class="external-box" />
+  <text x="710" y="105" text-anchor="middle" class="title text-white">Proveedores de Pago</text>
+
+  <!-- Provider 1 -->
+  <rect x="620" y="120" width="80" height="30" rx="3" fill="rgba(255,255,255,0.2)" />
+  <text x="660" y="138" text-anchor="middle" class="subtitle text-white">🏦 Stripe</text>
+
+  <!-- Provider 2 -->
+  <rect x="720" y="120" width="80" height="30" rx="3" fill="rgba(255,255,255,0.2)" />
+  <text x="760" y="138" text-anchor="middle" class="subtitle text-white">💳 PayPal</text>
+
+  <!-- Provider 3 -->
+  <rect x="620" y="160" width="80" height="30" rx="3" fill="rgba(255,255,255,0.2)" />
+  <text x="660" y="178" text-anchor="middle" class="subtitle text-white">🇨🇴 PSE</text>
+
+  <!-- Provider 4 -->
+  <rect x="720" y="160" width="80" height="30" rx="3" fill="rgba(255,255,255,0.2)" />
+  <text x="760" y="178" text-anchor="middle" class="subtitle text-white">🇧🇷 PIX</text>
+
+  <!-- Country Payment Methods -->
+  <rect x="600" y="220" width="220" height="100" rx="10" class="external-box" />
+  <text x="710" y="245" text-anchor="middle" class="title text-white">Métodos de Pago por País</text>
+  <text x="710" y="265" text-anchor="middle" class="subtitle text-white">🇨🇴 CO: PSE, Nequi, DaviPlata</text>
+  <text x="710" y="280" text-anchor="middle" class="subtitle text-white">🇲🇽 MX: SPEI, OXXO</text>
+  <text x="710" y="295" text-anchor="middle" class="subtitle text-white">🇧🇷 BR: PIX, Boleto</text>
+  <text x="710" y="310" text-anchor="middle" class="subtitle text-white">🇺🇸 US: ACH, PayPal</text>
 
   <!-- Infrastructure -->
-  <rect x="300" y="300" width="200" height="150" rx="10" class="infra-box" />
-  <text x="400" y="325" text-anchor="middle" class="title text-white">Infraestructura</text>
+  <rect x="300" y="380" width="250" height="180" rx="10" class="infra-box" />
+  <text x="425" y="405" text-anchor="middle" class="title text-white">Infraestructura</text>
 
   <!-- Database -->
-  <rect x="320" y="340" width="160" height="40" rx="5" fill="rgba(255,255,255,0.2)" />
-  <text x="400" y="355" text-anchor="middle" class="subtitle text-white">🗄️ PostgreSQL</text>
-  <text x="400" y="370" text-anchor="middle" class="subtitle text-white">Almacena datos de órdenes</text>
+  <rect x="320" y="420" width="100" height="60" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="370" y="440" text-anchor="middle" class="subtitle text-white">🗄️ PostgreSQL 16</text>
+  <text x="370" y="455" text-anchor="middle" class="subtitle text-white">Órdenes de pago</text>
+  <text x="370" y="470" text-anchor="middle" class="subtitle text-white">Métricas</text>
 
   <!-- PGAdmin -->
-  <rect x="320" y="390" width="160" height="40" rx="5" fill="rgba(255,255,255,0.2)" />
-  <text x="400" y="405" text-anchor="middle" class="subtitle text-white">🔧 PGAdmin</text>
-  <text x="400" y="420" text-anchor="middle" class="subtitle text-white">Interface de administración DB</text>
+  <rect x="430" y="420" width="100" height="60" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="480" y="440" text-anchor="middle" class="subtitle text-white">🔧 PGAdmin</text>
+  <text x="480" y="455" text-anchor="middle" class="subtitle text-white">Administración</text>
+  <text x="480" y="470" text-anchor="middle" class="subtitle text-white">Puerto 8080</text>
+
+  <!-- Docker -->
+  <rect x="320" y="490" width="210" height="60" rx="5" fill="rgba(255,255,255,0.2)" />
+  <text x="425" y="510" text-anchor="middle" class="subtitle text-white">🐳 Docker Compose</text>
+  <text x="425" y="525" text-anchor="middle" class="subtitle text-white">Setup automático con healthchecks</text>
+  <text x="425" y="540" text-anchor="middle" class="subtitle text-white">PostgreSQL + Next.js + PGAdmin</text>
 
   <!-- Arrows -->
-  <!-- User to WebApp -->
-  <path d="M 250 155 L 300 180" class="arrow" />
+  <!-- User to System -->
+  <path d="M 250 165 L 300 200" class="arrow" />
+  <text x="275" y="180" text-anchor="middle" class="subtitle">HTTPS/REST</text>
 
   <!-- Admin to PGAdmin -->
-  <path d="M 250 190 Q 275 240 300 360" class="arrow" />
+  <path d="M 250 225 Q 275 300 300 450" class="arrow" />
+  <text x="240" y="340" text-anchor="middle" class="subtitle">Web UI</text>
 
-  <!-- WebApp to Database -->
-  <path d="M 400 250 L 400 300" class="arrow" />
+  <!-- System to Database -->
+  <path d="M 425 310 L 425 380" class="arrow" />
+  <text x="445" y="345" text-anchor="middle" class="subtitle">Prisma ORM</text>
 
-  <!-- WebApp to Payment Gateway -->
-  <path d="M 500 180 L 550 120" class="dotted-arrow" />
+  <!-- System to Payment Providers -->
+  <path d="M 550 210 L 600 140" class="dotted-arrow" />
+  <text x="580" y="165" text-anchor="middle" class="subtitle">API Calls</text>
+
+  <!-- System to Payment Methods -->
+  <path d="M 550 250 L 600 270" class="dotted-arrow" />
+  <text x="580" y="265" text-anchor="middle" class="subtitle">País/Métodos</text>
 
   <!-- PGAdmin to Database -->
-  <path d="M 380 390 L 380 380" class="arrow" />
+  <path d="M 430 450 L 420 450" class="arrow" />
 </svg>

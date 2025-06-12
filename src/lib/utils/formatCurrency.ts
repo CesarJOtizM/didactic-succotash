@@ -7,18 +7,13 @@ export const formatCurrency = (amount: number, currency: string) => {
 		USD: '$'
 	};
 
-	// Mapeo de códigos de país a configuraciones regionales para formateo consistente
-	const localeMap = {
-		CL: 'es-CL',
-		CO: 'es-CO',
-		PE: 'es-PE',
-		MX: 'es-MX',
-		USD: 'en-US'
-	};
-
 	const symbol = symbols[currency as keyof typeof symbols] || '$';
-	const locale = localeMap[currency as keyof typeof localeMap] || 'en-US';
 
-	// Usar configuración regional específica para evitar diferencias entre servidor y cliente
-	return `${symbol}${amount.toLocaleString(locale)} ${currency}`;
+	// Formatear número manualmente para consistencia entre servidor y cliente
+	const formattedAmount = new Intl.NumberFormat('en-US', {
+		minimumFractionDigits: 0,
+		maximumFractionDigits: 0
+	}).format(amount);
+
+	return `${symbol}${formattedAmount} ${currency}`;
 };

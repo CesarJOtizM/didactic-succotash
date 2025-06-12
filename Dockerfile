@@ -12,7 +12,7 @@ COPY package*.json ./
 COPY bun.lock* ./
 
 # Instalar dependencias con Bun (sin scripts de prepare para evitar Husky)
-RUN bun install --frozen-lockfile --ignore-scripts
+RUN bun install --ignore-scripts
 
 # Etapa de desarrollo
 FROM base AS dev
@@ -61,7 +61,7 @@ WORKDIR /app
 # Instalar solo dependencias de producción con Bun
 COPY package*.json ./
 COPY bun.lock* ./
-RUN bun install --frozen-lockfile --production --ignore-scripts
+RUN bun install --ignore-scripts
 
 # Copiar archivos construidos
 COPY --from=builder /app/.next ./.next

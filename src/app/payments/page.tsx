@@ -3,6 +3,9 @@ import { type Metadata, type NextPage } from 'next';
 import { PaymentOrderResponseDto } from 'src/application/dtos';
 import { PaymentList } from 'src/components';
 
+// Configurar como página dinámica ya que los datos cambian frecuentemente
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
 	title: 'Payments',
 	description: 'Payments'

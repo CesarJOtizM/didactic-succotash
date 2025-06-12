@@ -11,6 +11,7 @@ export interface PaymentOrder {
 	readonly provider?: string;
 	readonly attempts?: number;
 	readonly processedAt?: Date;
+	readonly transactionId?: string;
 }
 
 // Helper para validar que el amount sea positivo

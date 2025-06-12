@@ -4,7 +4,6 @@ import React from 'react';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, Calendar, CheckCircle, Clock, MapPin, XCircle } from 'lucide-react';
 import { PaymentOrderResponseDto } from 'src/application/dtos';
-import { formatDate } from 'src/lib/utils';
 import { formatCurrency } from 'src/lib/utils/formatCurrency';
 import { Badge, Button, Card, CardContent } from '../ui';
 
@@ -99,9 +98,7 @@ export const PaymentCard: React.FC<Iprops> = ({ paymentOrder }) => {
 							<Calendar className="h-3 w-3 shrink-0" />
 							<span className="truncate">
 								{status === 'pending' ? 'Creado: ' : 'Procesado: '}
-								{formatDate(
-									status === 'pending' ? new Date(created_at) : new Date(processed_at || created_at)
-								)}
+								{processed_at || created_at}
 							</span>
 						</div>
 

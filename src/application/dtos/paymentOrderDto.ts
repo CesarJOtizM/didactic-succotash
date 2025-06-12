@@ -1,5 +1,6 @@
 import { PaymentOrder } from 'src/domain/entities/paymentOrder';
 import { PaymentOrderResponse } from 'src/lib/schemas';
+import { PaymentMethodResponseDto } from './paymentMethodDto';
 
 // DTO para crear una payment order
 export interface CreatePaymentOrderDto {
@@ -22,13 +23,16 @@ export interface PaymentOrderResponseDto {
 		readonly provider: string;
 		readonly attempts: number;
 		readonly processed_at?: string;
+		readonly transaction_id?: string;
 	};
+	readonly available_payment_methods?: PaymentMethodResponseDto[];
 }
 
 // Mapper para convertir entidad de dominio a DTO de respuesta
 export const mapPaymentOrderToResponseDto = (
 	paymentOrder: PaymentOrder,
-	baseUrl: string
+	baseUrl: string,
+	availablePaymentMethods?: PaymentMethodResponseDto[]
 ): PaymentOrderResponseDto => ({
 	uuid: paymentOrder.uuid,
 	type: 'payment_order',
@@ -41,7 +45,8 @@ export const mapPaymentOrderToResponseDto = (
 		status: paymentOrder.status || 'completed',
 		provider: paymentOrder.provider || '',
 		attempts: paymentOrder.attempts || 0
-	}
+	},
+	available_payment_methods: availablePaymentMethods
 });
 
 // Mapper para convertir DTO a entidad de dominio

@@ -1,10 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { mapPaymentMethodToResponseDto } from 'src/application/dtos/paymentMethodDto';
 import { mapPaymentOrderToResponseDto } from 'src/application/dtos/paymentOrderDto';
 import {
 	createGetPaymentOrderByUuid,
 	createProcessPaymentOrderUseCase
 } from 'src/application/use-cases';
+import { getAvailablePaymentMethodsForAmount } from 'src/infrastructure/mocks';
 import { paymentOrderRepository } from 'src/infrastructure/repositories/prismaPaymentOrderRepository';
+import { createErrorResponse } from 'src/lib/utils';
 
 // Instancias de los casos de uso
 const getPaymentOrderByUuidUseCase = createGetPaymentOrderByUuid(paymentOrderRepository);
@@ -15,19 +18,6 @@ const getBaseUrl = (request: NextRequest): string => {
 	const host = request.headers.get('host') || 'localhost:3000';
 	const protocol = request.headers.get('x-forwarded-proto') || 'http';
 	return `${protocol}://${host}`;
-};
-
-// Helper para crear respuestas de error estándar
-const createErrorResponse = (message: string, status: number) => {
-	return NextResponse.json(
-		{
-			error: {
-				message,
-				status
-			}
-		},
-		{ status }
-	);
 };
 
 // GET /api/payment_order/[uuid]
@@ -61,8 +51,19 @@ export async function GET(
 		// Obtener URL base para construir payment_url
 		const baseUrl = getBaseUrl(request);
 
-		// Mapear a DTO de respuesta
-		const responseDto = mapPaymentOrderToResponseDto(result.data, baseUrl);
+		// Obtener métodos de pago disponibles para esta orden
+		const availablePaymentMethods = getAvailablePaymentMethodsForAmount(
+			result.data.countryIsoCode,
+			result.data.amount
+		);
+
+		// Mapear métodos de pago a DTOs
+		const paymentMethodDtos = availablePaymentMethods.map(method =>
+			mapPaymentMethodToResponseDto(method)
+		);
+
+		// Mapear a DTO de respuesta con métodos de pago incluidos
+		const responseDto = mapPaymentOrderToResponseDto(result.data, baseUrl, paymentMethodDtos);
 
 		return NextResponse.json(responseDto, { status: 200 });
 	} catch (error) {

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { ArrowRight, Calendar, CheckCircle, Clock, MapPin, XCircle } from 'lucide-react';
 import { PaymentOrderResponseDto } from 'src/application/dtos';
 import { formatCurrency } from 'src/lib/utils/formatCurrency';
+import { getCountryName } from 'src/lib/utils/getCountryName';
 import { Badge, Button, Card, CardContent } from '../ui';
 
 interface Iprops {
@@ -22,7 +23,6 @@ export const PaymentCard: React.FC<Iprops> = ({ paymentOrder }) => {
 			created_at,
 			processed_at,
 			provider,
-			attempts,
 			country_iso_code
 		}
 	} = paymentOrder;
@@ -92,7 +92,7 @@ export const PaymentCard: React.FC<Iprops> = ({ paymentOrder }) => {
 					<div className="space-y-1.5 text-xs text-gray-600">
 						<div className="flex items-center gap-1.5">
 							<MapPin className="h-3 w-3 shrink-0" />
-							<span className="truncate">{country_iso_code}</span>
+							<span className="truncate">{getCountryName(country_iso_code)}</span>
 						</div>
 						<div className="flex items-center gap-1.5">
 							<Calendar className="h-3 w-3 shrink-0" />
@@ -106,12 +106,6 @@ export const PaymentCard: React.FC<Iprops> = ({ paymentOrder }) => {
 							<div className="flex items-start gap-1.5">
 								<span className="shrink-0 font-medium">Proveedor:</span>
 								<span className="truncate">{provider}</span>
-							</div>
-						)}
-						{attempts && attempts > 1 && (
-							<div className="flex items-center gap-1.5">
-								<span className="shrink-0 font-medium">Intentos:</span>
-								<span>{attempts}</span>
 							</div>
 						)}
 					</div>

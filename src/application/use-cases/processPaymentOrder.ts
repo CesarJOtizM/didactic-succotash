@@ -88,16 +88,18 @@ export const createProcessPaymentOrderUseCase = (
 
 			// Mapear respuesta según el resultado
 			if (paymentResult.success) {
-				// Actualizar status a completed
+				// Actualizar status a completed con provider y transactionId
 				await paymentOrderRepository.update(params.uuid, {
 					status: 'completed',
 					attempts: newAttempts,
-					processedAt: new Date()
+					processedAt: new Date(),
+					provider: paymentResult.provider_id,
+					transactionId: paymentResult.transaction_id
 				});
 
 				const successResponse = mapToProcessPaymentSuccessResponse(paymentResult.transaction_id);
 				console.info(
-					`✅ Pago completado exitosamente - Transaction: ${paymentResult.transaction_id}`
+					`✅ Pago completado exitosamente - Transaction: ${paymentResult.transaction_id} - Provider: ${paymentResult.provider_id}`
 				);
 
 				return {
@@ -105,16 +107,18 @@ export const createProcessPaymentOrderUseCase = (
 					data: successResponse
 				};
 			} else {
-				// Actualizar status a failed
+				// Actualizar status a failed con provider y transactionId
 				await paymentOrderRepository.update(params.uuid, {
 					status: 'failed',
 					attempts: newAttempts,
-					processedAt: new Date()
+					processedAt: new Date(),
+					provider: paymentResult.provider_id,
+					transactionId: paymentResult.transaction_id
 				});
 
 				const errorResponse = mapToProcessPaymentErrorResponse(paymentResult.transaction_id);
 				console.info(
-					`❌ Pago falló - Transaction: ${paymentResult.transaction_id} | Error: ${paymentResult.error_message}`
+					`❌ Pago falló - Transaction: ${paymentResult.transaction_id} - Provider: ${paymentResult.provider_id} | Error: ${paymentResult.error_message}`
 				);
 
 				return {

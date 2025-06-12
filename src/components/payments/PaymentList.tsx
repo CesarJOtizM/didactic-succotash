@@ -83,7 +83,7 @@ export const PaymentList: React.FC<Iprops> = ({ orders }) => {
 								activeTab={activeTab}
 								onTabChange={setActiveTab}
 							>
-								<div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+								<div className="gap-4">
 									{orders.length === 0 && (
 										<EmptyResults
 											icon={<Clock className="mx-auto h-12 w-12" />}
@@ -91,20 +91,22 @@ export const PaymentList: React.FC<Iprops> = ({ orders }) => {
 										/>
 									)}
 
-									{activeTab === 'pending' &&
-										sortedOrders.pendingOrders.map(order => (
-											<PaymentCard key={order.uuid} paymentOrder={order} />
-										))}
+									<div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+										{activeTab === 'pending' &&
+											sortedOrders.pendingOrders.map(order => (
+												<PaymentCard key={order.uuid} paymentOrder={order} />
+											))}
 
-									{activeTab === 'completed' &&
-										sortedOrders.completedOrders.map(order => (
-											<PaymentCard key={order.uuid} paymentOrder={order} />
-										))}
+										{activeTab === 'completed' &&
+											sortedOrders.completedOrders.map(order => (
+												<PaymentCard key={order.uuid} paymentOrder={order} />
+											))}
 
-									{activeTab === 'failed' &&
-										sortedOrders.failedOrders.map(order => (
-											<PaymentCard key={order.uuid} paymentOrder={order} />
-										))}
+										{activeTab === 'failed' &&
+											sortedOrders.failedOrders.map(order => (
+												<PaymentCard key={order.uuid} paymentOrder={order} />
+											))}
+									</div>
 								</div>
 							</StatusTabs>
 						</CardContent>

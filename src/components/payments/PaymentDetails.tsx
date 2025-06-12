@@ -20,12 +20,16 @@ export interface IFormValues {
 	email: string;
 }
 
-export const PaymentDetails: React.FC<Props> = ({ paymentOrder, paymentMethods }) => {
+export const PaymentDetails: React.FC<Props> = ({
+	paymentOrder: initialPaymentOrder,
+	paymentMethods
+}) => {
 	const [step, setStep] = useState<'select' | 'form' | 'processing' | 'success' | 'error'>(
 		'select'
 	);
 	const [loading, setLoading] = useState(false);
 	const [selectedMethod, setSelectedMethod] = useState<PaymentMethodResponseDto | null>(null);
+	const [paymentOrder, setPaymentOrder] = useState<PaymentOrderResponseDto>(initialPaymentOrder);
 	const selectedMethodData = paymentMethods.find(m => m.id === selectedMethod?.id);
 
 	const handleMethodSelect = (method: PaymentMethodResponseDto) => {
@@ -33,30 +37,69 @@ export const PaymentDetails: React.FC<Props> = ({ paymentOrder, paymentMethods }
 		setStep('form');
 	};
 
+	// Función para actualizar el payment order desde el servidor
+	const refreshPaymentOrder = async () => {
+		try {
+			const response = await fetch(`/api/payment_order/${paymentOrder.uuid}`);
+			if (response.ok) {
+				const updatedPaymentOrder = await response.json();
+				setPaymentOrder(updatedPaymentOrder);
+			}
+		} catch (error) {
+			console.error('Error al actualizar payment order:', error);
+		}
+	};
+
 	const handlePaymentSubmit = async (formData: IFormValues) => {
 		setLoading(true);
 		setStep('processing');
-		console.log(formData);
 
 		try {
-			// Simular procesamiento de pago
-			await new Promise(resolve => setTimeout(resolve, 3000));
+			// Hacer llamada al API para procesar el pago
+			const response = await fetch(`/api/payment_order/${paymentOrder.uuid}`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					payment_method_id: selectedMethod?.id,
+					// Se pueden agregar más datos del formulario si son necesarios
+					customer_data: formData
+				})
+			});
 
-			// Simular éxito/error aleatorio para demostración
-			const success = Math.random() > 0.3;
+			if (!response.ok) {
+				// Si el response no es ok, intentamos obtener el mensaje de error
+				const errorData = await response.json().catch(() => null);
+				throw new Error(errorData?.error || `Error del servidor: ${response.status}`);
+			}
 
-			if (success) {
+			// Parsear la respuesta
+			const result = await response.json();
+
+			// Verificar el status de la respuesta del procesamiento
+			if (result.status === 'success') {
+				console.log('✅ Pago procesado exitosamente:', result.transaction_id);
 				setStep('success');
-			} else {
+				await refreshPaymentOrder();
+			} else if (result.status === 'Error') {
+				console.log('❌ Error en el procesamiento del pago:', result.transaction_id);
 				setStep('error');
+				await refreshPaymentOrder();
+			} else {
+				// Manejar casos inesperados
+				console.warn('⚠️ Respuesta inesperada del API:', result);
+				setStep('error');
+				await refreshPaymentOrder();
 			}
 		} catch (error) {
-			console.error(error);
+			console.error('💥 Error al procesar el pago:', error);
 			setStep('error');
 		} finally {
 			setLoading(false);
 		}
 	};
+
 	return (
 		<div className="container mx-auto max-w-6xl px-4 py-8">
 			{/* Header */}

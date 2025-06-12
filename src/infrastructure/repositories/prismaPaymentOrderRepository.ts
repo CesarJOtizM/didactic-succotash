@@ -69,7 +69,8 @@ export const createPrismaPaymentOrderRepository = (): PaymentOrderRepository => 
 					...(updates.status && { status: updates.status }),
 					...(updates.provider && { provider: updates.provider }),
 					...(updates.attempts !== undefined && { attempts: updates.attempts }),
-					...(updates.processedAt && { processedAt: updates.processedAt })
+					...(updates.processedAt && { processedAt: updates.processedAt }),
+					...(updates.transactionId && { transactionId: updates.transactionId })
 				}
 			});
 
@@ -101,7 +102,8 @@ const mapPrismaToPaymentOrder = (prismaPaymentOrder: PrismaPaymentOrder): Paymen
 	status: prismaPaymentOrder.status,
 	provider: prismaPaymentOrder.provider,
 	attempts: prismaPaymentOrder.attempts,
-	processedAt: prismaPaymentOrder?.processedAt || undefined
+	processedAt: prismaPaymentOrder?.processedAt || undefined,
+	transactionId: prismaPaymentOrder.transactionId || undefined
 });
 
 // Instancia singleton del repositorio

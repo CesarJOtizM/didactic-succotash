@@ -23,7 +23,7 @@ model PaymentOrder {
   createdAt      DateTime  @default(now()) @map("created_at")
   paymentUrl     String    @map("payment_url")
   status         String    @default("pending")
-  provider       String    @default("stripe")
+  provider       String    @default("")
   attempts       Int       @default(0)
   processedAt    DateTime? @map("processed_at")
   transactionId  String?   @map("transaction_id")
